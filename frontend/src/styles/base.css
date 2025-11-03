@@ -24,7 +24,9 @@ p{
   font-size: var(--px-base);
 }
 
-
+hr{
+  border: thin solid rgba(47, 46, 48, 0.252);
+}
 
 /* :focus-visible {
   outline: 3px solid rgba(46, 124, 246, 0.35);
@@ -94,6 +96,20 @@ p{
   }
 }
 
+
+.card{
+    max-width: 70rem;
+    border-radius: var(--radius-box);
+    border: var(--border-card);
+    background-color: var(--bg);
+    padding: var(--px-sm);
+}
+
+.actions{
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
 /* Optional link hover */
 input:hover, select:hover, button:hover, a:hover { opacity: 0.7; }
 
@@ -129,4 +145,17 @@ input, select, button, a{
 .btn--ghost{
   background-color: #F8FAFC;
   border: thin solid var(--border-sub);
+}
+
+.btn--cancel{
+  background-color: #F8FAFC;
+  border: thin solid var(--border-sub);
+  color: #991b1b;
+}
+
+.btn--sign-out{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }

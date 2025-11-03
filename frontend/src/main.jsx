@@ -5,7 +5,10 @@ import { router } from './app/router.jsx'
 import './styles/reset.css'
 import './styles/base.css'
 import './styles/pages.css'
-import './pages/Home.css'
+import './styles/pages/home.css'
+import './styles/pages/patient.css'
+
+
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>

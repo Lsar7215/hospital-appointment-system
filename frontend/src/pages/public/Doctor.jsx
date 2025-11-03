@@ -1,5 +1,5 @@
 
-import DoctorProfileCard from '../components/DoctorProfileCard'
+import DoctorProfileCard from '../../components/DoctorProfileCard'
 export default function Doctor(){
     return(
         <div className="doctor">

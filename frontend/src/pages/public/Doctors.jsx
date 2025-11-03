@@ -1,5 +1,5 @@
-import SearchBar from '../components/SearchBar'
-import DoctorCard from '../components/DoctorCard'
+import SearchBar from '../../components/SearchBar'
+import DoctorCard from '../../components/DoctorCard'
 export default function Doctors(){
     return(
         <div className="doctors">

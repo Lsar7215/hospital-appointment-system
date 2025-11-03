@@ -88,11 +88,7 @@
     color: var(--ink);
 }
 
-.header__actions{
-    display: flex;
-    gap: 1.2rem;
-    align-items: center;
-}
+
 /*Hero*/
 
 .hero{
@@ -238,15 +234,12 @@
 }
 
 /*DoctorCard*/
+
 .doctor-card{
-    padding: var(--px-sm);
     display: flex;
     flex-direction: column;
     gap: var(--px-base);
     transition: var(--transition-box);
-    border-radius: var(--radius-box);
-    border: var(--border-card);
-    background-color: var(--bg);
 }
 
 .doctor-card:hover{
@@ -290,9 +283,7 @@
     background-color:  var(--secondary);
 }
 
-.doctor-card__specialty:hover{
-    background-color: var(--primary);
-}
+
 .doctor-card__button{
     padding: 0.8rem var(--px-base);
     margin-top: var(--px-base);
@@ -392,10 +383,6 @@
     max-width: 102.4rem;
     display: grid;
     margin: var(--px-base) auto 0;
-    border: var(--border-card);
-    border-radius: var(--radius-box);
-    padding: var(--px-base);
-    background-color: var(--bg);
 }
 
 @media (min-width: 640px) {
