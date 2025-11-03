@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 import DoctorImage from '../assets/images/doctor1.png'
 export default function DoctorCard() {
     return (
-        <article className='doctor-card'>
+        <article className='doctor-card card'>
             <div className='doctor-card__top'>
                 <img className='doctor-card__profile' src={DoctorImage} alt="" />
                 <div className='doctor-card__info'>

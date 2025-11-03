@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import AppShell from "./AppShell";
 
-import Doctors from '../pages/Doctors';
-import Doctor from '../pages/Doctor'
-import Signup from '../pages/Signup'
-import Login from '../pages/Login';
-import Home from "../pages/Home";
+import Doctors from '../pages/public/Doctors';
+import Doctor from '../pages/public/Doctor'
+import Signup from '../pages/public/Signup'
+import Login from '../pages/public/Login';
+import Home from "../pages/public/Home";
+import Dashboard from "../pages/patient/PatientDashboard";
+import Account from "../pages/patient/Account"
 
 export const router = createBrowserRouter([
     {
@@ -16,6 +18,8 @@ export const router = createBrowserRouter([
             {path:"/doctor", element:<Doctor/>},
             {path:"/signup", element:<Signup/>},
             {path:"/login", element:<Login/>},
+            {path:"/dashboard", element:<Dashboard/>},
+            {path:"/account", element:<Account/>}
 
         ]
     }

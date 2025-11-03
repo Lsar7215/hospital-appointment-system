@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import DoctorImage from "../assets/images/doctor1.png";
 export default function DoctorProfileCard(){
     return (
-                <div className="doctor-profile__content">
+                <div className="doctor-profile__content card">
                   <article className="doctor-profile__card">
                     <div className="doctor-card__top">
                       <img
@@ -16,6 +16,7 @@ export default function DoctorProfileCard(){
                       <div className="doctor-card__info">
                         <h3 className="doctor-card__name">Dr. NAME NAME</h3>
                         <p className="doctor-card__specialty">SPECIALIST</p>
+                        
                       </div>
                     </div>
         

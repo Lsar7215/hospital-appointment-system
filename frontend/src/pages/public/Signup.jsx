@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import lockIcon from '../assets/images/icons/lock_b.png'
-import downIcon from '../assets/images/icons/down_g.png'
+import lockIcon from '../../assets/images/icons/lock_b.png'
+import downIcon from '../../assets/images/icons/down_g.png'
 export default function Signup(){
     return(
         <div className='auth'>
@@ -50,6 +50,14 @@ export default function Signup(){
                                         <img className='down__icon' src={downIcon} alt="" />
                                     </div>
                                 </div>
+                                <div className='form__field is-required'>
+                                    <label className='form__label' htmlFor="medicalCard">Medical card Number</label>
+                                    <input className='form__input' id="medicalCard" name="medicalCard" type="text" placeholder='000000' required/>
+                                </div>
+                                <div className='form__field'>
+                                    <label className='form__label' htmlFor="insuranceNum">Insurance number (optional)</label>
+                                    <input className='form__input' id="insuranceNum" name="insuranceNum" type="text" placeholder='000000'/>
+                                </div>
 
                                 <div className='form__field is-required'>
                                     <label className='form__label' htmlFor="password">Password</label>
@@ -89,62 +97,49 @@ export default function Signup(){
                                         <label className='form__label' htmlFor="country">Country</label>
                                         <div className='search__select-wrap'>
                                             <select className='form__select' id="country" name="country" type="text" defaultValue="HU" required>
-                                                <option value="AT">Austria</option>
-                                                <option value="BE">Belgium</option>
-                                                <option value="BG">Bulgaria</option>
-                                                <option value="HR">Croatia</option>
-                                                <option value="CY">Cyprus</option>
-                                                <option value="CZ">Czech Republic</option>
-                                                <option value="DK">Denmark</option>
-                                                <option value="EE">Estonia</option>
-                                                <option value="FI">Finland</option>
-                                                <option value="FR">France</option>
-                                                <option value="DE">Germany</option>
-                                                <option value="GR">Greece</option>
-                                                <option value="HU">Hungary</option>
-                                                <option value="IE">Ireland</option>
-                                                <option value="IT">Italy</option>
-                                                <option value="LV">Latvia</option>
-                                                <option value="LT">Lithuania</option>
-                                                <option value="LU">Luxembourg</option>
-                                                <option value="MT">Malta</option>
-                                                <option value="NL">Netherlands</option>
-                                                <option value="PL">Poland</option>
-                                                <option value="PT">Portugal</option>
-                                                <option value="RO">Romania</option>
-                                                <option value="SK">Slovakia</option>
-                                                <option value="SI">Slovenia</option>
-                                                <option value="ES">Spain</option>
-                                                <option value="SE">Sweden</option>
+                                                <option value="Austria">Austria</option>
+                                                <option value="Belgium">Belgium</option>
+                                                <option value="Bulgaria">Bulgaria</option>
+                                                <option value="Croatia">Croatia</option>
+                                                <option value="Cyprus">Cyprus</option>
+                                                <option value="Czech Republic">Czech Republic</option>
+                                                <option value="Denmark">Denmark</option>
+                                                <option value="Estonia">Estonia</option>
+                                                <option value="Finland">Finland</option>
+                                                <option value="France">France</option>
+                                                <option value="Germany">Germany</option>
+                                                <option value="Greece">Greece</option>
+                                                <option value="Hungary">Hungary</option>
+                                                <option value="Ireland">Ireland</option>
+                                                <option value="Italy">Italy</option>
+                                                <option value="Latvia">Latvia</option>
+                                                <option value="Lithuania">Lithuania</option>
+                                                <option value="Luxembourg">Luxembourg</option>
+                                                <option value="Malta">Malta</option>
+                                                <option value="Netherlands">Netherlands</option>
+                                                <option value="Poland">Poland</option>
+                                                <option value="Portugal">Portugal</option>
+                                                <option value="Romania">Romania</option>
+                                                <option value="Slovakia">Slovakia</option>
+                                                <option value="Slovenia">Slovenia</option>
+                                                <option value="Spain">Spain</option>
+                                                <option value="Sweden">Sweden</option>
+
                                             </select>
                                             <img className='down__icon' src={downIcon} alt="" />
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className='form__field is-required'>
-                                    <label className='form__label' htmlFor="medicalCard">Medical card Number</label>
-                                    <input className='form__input' id="medicalCard" name="medicalCard" type="text" placeholder='000000' required/>
-                                </div>
-                                <div className='form__field'>
-                                    <label className='form__label' htmlFor="insuranceNum">Insurance number (optional)</label>
-                                    <input className='form__input' id="insuranceNum" name="insuranceNum" type="text" placeholder='000000'/>
-                                </div>
-
-                                <div className="form__checks is-required">
-                                    <input className="form__checkbox" id="terms" name="terms" type="checkbox" required/>
-                                    <label className='form__label' htmlFor="terms">I agree to the <a href="">Terms of Service</a></label>
-                                </div>
-                                <div className="form__checks is-required">
-                                    <input className="form__checkbox" id="privacy" name="privacy" type="checkbox" required />
-                                    <label className='form__label' htmlFor="privacy">I have read the <a href="">Privacy Policy</a></label>
-                                </div>
-
-                                
-                                <button className="btn btn--primary form__submit" type="submit">Create account</button>
-                                
-                                
-                            </div>                    
+                            </div>    
+                            <div className="form__checks is-required">
+                                <input className="form__checkbox" id="terms" name="terms" type="checkbox" required/>
+                                <label className='form__label' htmlFor="terms">I agree to the <a href="">Terms of Service</a></label>
+                            </div>
+                            <div className="form__checks is-required">
+                                <input className="form__checkbox" id="privacy" name="privacy" type="checkbox" required />
+                                <label className='form__label' htmlFor="privacy">I have read the <a href="">Privacy Policy</a></label>
+                            </div> 
+                            <button className="btn btn--primary form__submit" type="submit">Create account</button>               
                         </form>
                     </div>
                     <div className='auth__alt'>

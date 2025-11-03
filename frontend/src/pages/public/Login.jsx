@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import LoginIcon from '../assets/images/icons/login_b.png'
+import LoginIcon from '../../assets/images/icons/login_b.png'
 export default function Login(){
     return(
         <div className='login'>

@@ -21,9 +21,6 @@
 
 
 @media (min-width: 1024px) {
-    .auth__inner{
-        max-width: 80% !important;
-    }
     .form__group-inner, .form--auth__inner{
     grid-template-columns: 1fr 1fr;
 }

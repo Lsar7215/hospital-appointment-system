@@ -17,7 +17,7 @@ export default function Hero() {
       <SearchBar/>
 
       {/* CTAs */}
-      <div className="hero__actions">
+      <div className="actions">
         <Link className="btn btn--primary" to="/doctors">Doctors</Link>
         <Link className="btn btn--ghost" to="/signup">Sign up free</Link>
       </div>
