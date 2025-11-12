@@ -46,17 +46,17 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
 - **Patient Dashboard**  
   - Search doctors by specialization/availability  
   - View doctor profiles  
-  - Book/cancel/reschedule appointments  
+  - Book/Cancel appointments  
   - View appointment history  
 - **Doctor Dashboard**  
   - Manage availability  
   - View appointments  
-  - Mark completed/missed appointments  
-  - Add consultation notes  
+  - Mark completed/missed appointments (Not yet developed)
+  - Add consultation notes (Not yet developed)
 - **Admin Dashboard**  
   - Manage doctors (add/edit/remove)  
-  - View daily/weekly appointment summaries  
-  - Generate reports  
+  - View appointment summaries  
+  - Generate reports (Not yet developed)
 
 ### Backend
 - **User Management**  
@@ -70,7 +70,6 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
   - Prevent double-booking  
 - **Reports & Analytics**  
   - Doctor workload reports  
-  - Patient no-show statistics  
   - Appointment history  
 - **System Infrastructure**  
   - Database  
@@ -82,25 +81,19 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
 ## 💻 Technology Stack
 
 ### Frontend
-- **Framework:** React.js / Next.js  
-- **Styling:** Tailwind CSS / Bootstrap  
-- **State Management:** Redux / Context API  
-- **Authentication UI:** JWT-based or OAuth  
+- **Framework:** React.js
+- **State Management:**  API  
 
 ### Backend
-- **Framework:** Node.js with Express.js (or Django/Flask if Python preferred)  
+- **Framework:** PHP
 - **Authentication:** JWT (JSON Web Tokens)  
-- **API Type:** RESTful API  
 
 ### Database
-- **Option 1 (Relational):** MySQL / PostgreSQL  
-- **Option 2 (NoSQL):** MongoDB  
+- MySQL
 
 ### Deployment & Tools
-- **Version Control:** GitHub / GitLab  
-- **Project Management:** Slack + Trello/Jira  
-- **Hosting:** AWS / Azure / Vercel / Heroku  
-- **CI/CD (optional):** GitHub Actions  
+- **Version Control:** GitHub
+- **Hosting:** Vercel / Heroku
 
 ---
 
@@ -111,7 +104,7 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
   - Design UI components  
 
 - **Backend**  
-  - Develop REST APIs  
+  - Develop APIs  
   - Manage authentication & database schema  
 
 - **Full Stack / QA**  
@@ -124,7 +117,4 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
 ## ✅ Deliverables
 1. Functional web application (frontend + backend + database).  
 2. Documentation (requirements, design, testing, deployment).  
-3. Task management setup on Slack/Trello for team collaboration.  
-
----
-
+3. Task management for team collaboration.  

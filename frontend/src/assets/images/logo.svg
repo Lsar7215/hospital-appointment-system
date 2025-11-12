@@ -1,0 +1,13 @@
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .a{fill:#2E7CF6;} /* primary */
+      .b{fill:#13B38B;} /* accent  */
+    </style>
+  </defs>
+  <!-- cross -->
+  <rect class="a" x="10" y="3" width="4" height="18" rx="2"></rect>
+  <rect class="a" x="3" y="10" width="18" height="4" rx="2"></rect>
+  <!-- small heart overlay -->
+  <path class="b" d="M12 11.2c-.9-1.1-2.5-1.2-3.4-.2-.9 1-.7 2.5.3 3.3l3.1 2.5 3.1-2.5c1-.8 1.2-2.3.3-3.3-.9-1-2.5-.9-3.4.2z"></path>
+</svg>

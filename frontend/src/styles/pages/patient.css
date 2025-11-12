@@ -1,0 +1,105 @@
+
+.patient{
+    background: var(--bg-page);
+}
+
+
+.patient__main{
+    display: flex;
+    flex-direction: column;
+    gap: var(--px-lg);
+    max-width: 70rem;
+    margin: auto;
+}
+.section-head__title{
+    margin-bottom: var(--px-xs);
+}
+.patient__list{
+    display: flex;
+    flex-direction: column;
+    gap: var(--px-xs);
+}
+
+.patient__lead{
+    color: var(--sub);
+}
+
+.patient__btn{
+    width: fit-content;
+    margin: auto;
+}
+/*Appointment*/
+.apt-detail{
+    margin: var(--px-xs) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--px-xs);
+}
+
+.doctor-card__name{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.apt-card__status{
+    font-size: 1.2rem;
+    margin: 0.8rem 0;
+    padding: 0.2rem 0.8rem;
+    width: fit-content;
+    border-radius: var(--radius-box);
+} 
+
+.apt-card__status--completed{
+  background: #DCFCE7;
+  color: #166534;
+}
+
+.apt-card__status--booked{
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.status-chip--cancelled {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+/*Account*/
+.profile{
+    padding: var(--px-lg);
+    background: var(--bg-page);
+}
+.profile__inner{
+    max-width: 45rem;
+    margin: auto;
+    display: grid;
+    gap: var(--px-xs);
+}
+.profile-head{
+    display: grid;
+    gap: var(--px-xs);
+    place-items: center;
+    
+}
+.profile-card__info{
+    display: grid;
+    gap: var(--px-base);
+}
+
+.profile-card__label{
+    color: var(--sub);
+    margin-bottom: 0.4rem;
+    display: block;
+}
+
+.profile-card__value{
+    word-break: break-word;
+}
+
+.profile__actions{
+    display: grid;
+    gap: var(--px-base);
+}
+
