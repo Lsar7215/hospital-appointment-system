@@ -16,44 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `patient`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS patient;
+DROP TABLE IF EXISTS user;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE patient (
-  patient_id int NOT NULL,
-  first_name varchar(45) NOT NULL,
-  last_name varchar(45) NOT NULL,
-  phone varchar(45) NOT NULL,
-  date_of_birth date NOT NULL,
-  gender varchar(45) NOT NULL,
-  passward varchar(45) NOT NULL,
+CREATE TABLE `user` (
   email varchar(254) NOT NULL,
-  postal_code varchar(45) NOT NULL,
-  address1 varchar(45) NOT NULL,
-  address2 varchar(45) DEFAULT NULL,
-  city varchar(45) NOT NULL,
-  state varchar(45) NOT NULL,
-  country varchar(45) NOT NULL,
-  medical_card_number varchar(45) NOT NULL,
-  insurance_number varchar(45) DEFAULT NULL,
-  check_password varchar(45) NOT NULL,
-  PRIMARY KEY (patient_id),
-  KEY fk_patient_email_idx (email),
-  CONSTRAINT fk_patient_email FOREIGN KEY (email) REFERENCES `user` (email)
+  type_of_user varchar(1) NOT NULL,
+  PRIMARY KEY (email),
+  UNIQUE KEY uq_user_email (email),
+  UNIQUE KEY email_UNIQUE (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `patient`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES patient WRITE;
-/*!40000 ALTER TABLE patient DISABLE KEYS */;
-INSERT INTO patient VALUES (1,'test','patient','12345','2003-09-05','femail','12345','test@patient.com','1234','12-34 egertem','test','Debrecen','Haj','Hungary','12345',NULL,'12345');
-/*!40000 ALTER TABLE patient ENABLE KEYS */;
+LOCK TABLES user WRITE;
+/*!40000 ALTER TABLE user DISABLE KEYS */;
+INSERT INTO user VALUES ('admin@admin.com','a'),('doctor@doctor.com','d'),('test@patient.com','p');
+/*!40000 ALTER TABLE user ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
