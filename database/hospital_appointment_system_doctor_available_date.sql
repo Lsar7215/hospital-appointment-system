@@ -19,17 +19,17 @@
 -- Table structure for table `doctor_available_date`
 --
 
-DROP TABLE IF EXISTS `doctor_available_date`;
+DROP TABLE IF EXISTS doctor_available_date;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `doctor_available_date` (
-  `schedule_id` int NOT NULL AUTO_INCREMENT,
-  `d_id` int NOT NULL,
-  `available_date` date NOT NULL,
-  `available_time` time NOT NULL,
-  PRIMARY KEY (`schedule_id`),
-  UNIQUE KEY `uniq_doctor_slot` (`d_id`,`available_date`,`available_time`),
-  CONSTRAINT `fk_doctor_id_available_date` FOREIGN KEY (`d_id`) REFERENCES `doctor` (`doctor_id`) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE doctor_available_date (
+  schedule_id int NOT NULL AUTO_INCREMENT,
+  d_id int NOT NULL,
+  available_date date NOT NULL,
+  available_time time NOT NULL,
+  PRIMARY KEY (schedule_id),
+  UNIQUE KEY uniq_doctor_slot (d_id,available_date,available_time),
+  CONSTRAINT fk_doctor_id_available_date FOREIGN KEY (d_id) REFERENCES doctor (doctor_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -37,10 +37,10 @@ CREATE TABLE `doctor_available_date` (
 -- Dumping data for table `doctor_available_date`
 --
 
-LOCK TABLES `doctor_available_date` WRITE;
-/*!40000 ALTER TABLE `doctor_available_date` DISABLE KEYS */;
-INSERT INTO `doctor_available_date` VALUES (1,1,'2025-10-21','12:00:00'),(3,2,'2025-10-21','10:00:00'),(4,2,'2025-10-21','12:00:00'),(2,3,'2025-10-21','14:00:00');
-/*!40000 ALTER TABLE `doctor_available_date` ENABLE KEYS */;
+LOCK TABLES doctor_available_date WRITE;
+/*!40000 ALTER TABLE doctor_available_date DISABLE KEYS */;
+INSERT INTO doctor_available_date VALUES (1,1,'2025-10-21','12:00:00');
+/*!40000 ALTER TABLE doctor_available_date ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-21 20:09:27
+-- Dump completed on 2025-11-12 10:02:29
