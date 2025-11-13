@@ -234,7 +234,6 @@
 }
 
 /*DoctorCard*/
-
 .doctor-card{
     display: flex;
     flex-direction: column;
@@ -245,7 +244,6 @@
 .doctor-card:hover{
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
 }
-
 
 
 .doctor-card__top{
@@ -264,18 +262,16 @@
 .doctor-card__info{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
 }
 
 .doctor-card__name{
-    margin-bottom: 0.4rem;
     color: var(--ink);
 }
 
 .doctor-card__specialty{
     font-size: 1.2rem;
-    margin: 0.8rem 0;
     padding: 0.2rem 0.8rem;
     width: fit-content;
     color: var(--primary);
@@ -289,6 +285,64 @@
     margin-top: var(--px-base);
     width: 100%;
 }
+
+
+/*DoctorProfileCard*/
+
+.doctor-profile__card{
+    display: flex;
+    flex-direction: column;
+    gap: var(--px-base);
+    transition: var(--transition-box);
+}
+
+.doctor-profile__card:hover{
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+}
+
+
+.doctor-profile__top{
+    display: flex;
+    flex-direction: row;
+    gap: var(--px-base);
+}
+
+.doctor-profile__profile{
+    object-fit: cover;
+    border-radius: var(--radius-box);
+    width: 8rem;
+    height: 8rem;
+}
+
+.doctor-profile__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.doctor-profile__name{
+    margin-bottom: 0.4rem;
+    color: var(--ink);
+}
+
+.doctor-profile__specialty{
+    font-size: 1.2rem;
+    margin: 0.8rem 0;
+    padding: 0.2rem 0.8rem;
+    width: fit-content;
+    color: var(--primary);
+    border-radius: var(--radius-box);
+    background-color:  var(--secondary);
+}
+
+
+.doctor-profile__button{
+    padding: 0.8rem var(--px-base);
+    margin-top: var(--px-base);
+    width: 100%;
+}
+
 /*SearchPreview*/
 .search-preview{
     padding: 6.4rem 0;
@@ -411,7 +465,6 @@
     padding: var(--px-base);
     border-radius: var(--radius-box);
     background-color: var(--bg2);
-    margin-top: var(--px-base);
 }
 .doctor-card__about-title{
     margin-bottom: 0.8rem;
@@ -455,8 +508,9 @@
 } 
 
 .availability__slot--available{
-    border: transparent 0.2rem solid;
+    border:0.1rem solid var(--primary);
     color: var(--primary);
+    background-color: #eff6ff3f;
 }
 
 .availability__slot--available:hover{
@@ -470,11 +524,18 @@
     cursor: not-allowed;
     background-color: var(--bg2);
     color: #94A3B8;
+    border:0.1rem solid var(--sub);
+}
+.availability__slot--unavailable:hover{
+    opacity: 1;
 }
 
+.availability__slot--selected{
+    background-color: rgba(0, 128, 0, 0.635);
+}
 .availability__legend{
     display: flex;
-    margin-top: var(--px-base);
+    margin: var(--px-base) 0;
     gap: var(--px-base);
     justify-content: center;
     align-items: center;

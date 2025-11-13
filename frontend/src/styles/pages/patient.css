@@ -1,10 +1,10 @@
 
-.patient{
+.dashboard{
     background: var(--bg-page);
 }
 
 
-.patient__main{
+.dashboard__main{
     display: flex;
     flex-direction: column;
     gap: var(--px-lg);
@@ -14,17 +14,17 @@
 .section-head__title{
     margin-bottom: var(--px-xs);
 }
-.patient__list{
+.dashboard__list{
     display: flex;
     flex-direction: column;
     gap: var(--px-xs);
 }
 
-.patient__lead{
+.dashboard__lead{
     color: var(--sub);
 }
 
-.patient__btn{
+.dashboard__btn{
     width: fit-content;
     margin: auto;
 }
@@ -61,7 +61,7 @@
   color: #0369A1;
 }
 
-.status-chip--cancelled {
+.apt-card__status--cancelled {
   background: #FEE2E2;
   color: #991B1B;
 }

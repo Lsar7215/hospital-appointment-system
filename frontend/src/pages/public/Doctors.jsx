@@ -1,8 +1,15 @@
+import { useLocation } from "react-router-dom";
+
 import SearchBar from '../../components/SearchBar'
 import DoctorCard from '../../components/DoctorCard'
+
 export default function Doctors(){
+    const {pathname} = useLocation();
+
+    const variant = pathname.startsWith("/patient") ? "patient" : "lp";
+
     return(
-        <div className="doctors">
+        <div className="doctors" id="doctors">
             <div className='container'>
                 <div className='doctors__header'>
                     <h1 className='doctors__title'>Find Doctors</h1>
@@ -22,14 +29,14 @@ export default function Doctors(){
                     </div>
                 </div>
                 <div className="doctors__grid">
-                    <DoctorCard/>
-                    <DoctorCard/>
-                    <DoctorCard/>
-                    <DoctorCard/>
-                    <DoctorCard/>
-                    <DoctorCard/>
-                    <DoctorCard/>
-                    <DoctorCard/>
+                    <DoctorCard variant={variant}/>
+                    <DoctorCard  variant={variant}/>
+                    <DoctorCard variant={variant}/>
+                    <DoctorCard variant={variant}/>
+                    <DoctorCard variant={variant}/>
+                    <DoctorCard  variant={variant}/>
+                    <DoctorCard variant={variant}/>
+                    <DoctorCard variant={variant}/>
                 </div>
                 <div className='doctors__pagination'>
                     <button className='btn btn--ghost'>See more</button>

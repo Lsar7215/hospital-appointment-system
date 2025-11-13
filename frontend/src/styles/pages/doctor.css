@@ -1,0 +1,107 @@
+.patient__status{
+    font-size: 1.2rem;
+    margin: 0.8rem 0;
+    padding: 0.2rem 0.8rem;
+    width: fit-content;
+    border-radius: var(--radius-box);
+}
+
+.patient__status--first-visit{
+  background: #DCFCE7;
+  color: #166534;
+}
+
+.patient__status--follow-up{
+    background: #dcdffc;
+    color: blue;
+}
+
+
+/*Schedule*/
+.schedule{
+  background: var(--bg-page);
+}
+
+.schedule span{
+  font-size: var(--px-base);
+  color: var(--sub);
+}
+.schedule__title{
+  margin-bottom: var(--px-base);
+}
+
+.schedule-day__header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.schedule__week, .schedule-day, .schedule__card{
+  display: flex;
+  flex-direction: column;
+  gap: var(--px-base);
+}
+.schedule__legend{
+  display:flex;
+  gap: var(--px-base);
+}
+.schedule__legend-item{
+  display: flex;
+  flex-direction: row;
+  gap: var(--px-xs);
+  align-items: center;
+}
+.schedule__legend-dot{
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+.schedule__legend-dot--available{
+  background-color: #166534;
+}
+.schedule__legend-dot--unavailable{
+  background-color: var(--sub);
+}
+.schedule-segment__summary{
+  display: flex;
+  flex-direction: row;
+  gap: var(--px-xs);
+  margin-bottom: var(--px-xs);
+}
+.schedule__actions{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.schedule-segment__actions{
+  display: flex;
+  flex-direction: row;
+  gap: var(--px-base);
+}
+.toggle__btn{
+  min-width: fit-content;
+}
+.schedule__week button{
+  padding: 0.8rem 1.6rem;
+  font-size: 1.6rem;
+  align-items: center;
+  border: 0.2rem solid var(--sub);
+  border-radius: var(--radius-box);
+  transition: all 0.2s;
+}
+.schedule-segment__slots{
+  display: flex;
+  flex-direction: row;
+  gap: var(--px-sm);
+}
+.slot{
+  min-width: 8rem;
+}
+
+.schedule__card{
+    border-radius: var(--radius-box);
+    border: var(--border-card);
+    background-color: var(--bg);
+    padding: var(--px-sm);
+}

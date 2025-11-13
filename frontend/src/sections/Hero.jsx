@@ -18,7 +18,7 @@ export default function Hero() {
 
       {/* CTAs */}
       <div className="actions">
-        <Link className="btn btn--primary" to="/doctors">Doctors</Link>
+        <a className="btn btn--primary" href="/#search-preview">Doctors</a>
         <Link className="btn btn--ghost" to="/signup">Sign up free</Link>
       </div>
     </div>
