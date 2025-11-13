@@ -8,19 +8,29 @@ import Login from '../pages/public/Login';
 import Home from "../pages/public/Home";
 import Dashboard from "../pages/patient/PatientDashboard";
 import Account from "../pages/patient/Account"
+import Appointments from "../pages/doctor/Appointments";
+import Schedule from "../pages/doctor/Schedule"
 
 export const router = createBrowserRouter([
     {
         element:<AppShell/>,
         children:[
+            // Public
             {path:"/", element:<Home />},
             {path:"/doctors", element:<Doctors/>},
             {path:"/doctor", element:<Doctor/>},
+            // {path:"/doctor/:id", element:<Doctor/>},
             {path:"/signup", element:<Signup/>},
             {path:"/login", element:<Login/>},
-            {path:"/dashboard", element:<Dashboard/>},
-            {path:"/account", element:<Account/>}
-
+            // Patient
+            {path:"/patient/dashboard", element:<Dashboard/>},
+            {path:"/patient/doctors", element:<Doctors/>},
+            {path:"/patient/doctor", element:<Doctor/>},
+            // {path:"/patient/doctor/:id", element:<Doctor/>},
+            {path:"/patient/account", element:<Account/>},
+            // Doctor 
+            {path:"/doctorpage/appointments", element:<Appointments/>},
+            {path:"/doctorpage/schedule", element:<Schedule/>},
         ]
     }
 ])
