@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import lockIcon from '../../assets/images/icons/lock_b.png'
 import downIcon from '../../assets/images/icons/down_g.png'
+
 export default function Signup(){
+    const SIGNUP_API_URL = "http://localhost/doctor-appointment-system/signup.php";
     return(
         <div className='auth'>
             <section className='auth__section'>
@@ -14,7 +16,7 @@ export default function Signup(){
                         </div>
                     </header>
                     <div className='auth__card'>
-                        <form className='form form--auth' action="" method="post">
+                        <form className='form form--auth' action={SIGNUP_API_URL} method="POST">
                             <div className='form--auth__inner form__inner'>
                                 <div className='form__field is-required'>
                                     <label className='form__label' htmlFor="firstName">First name</label>

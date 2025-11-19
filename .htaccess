@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # 1. Do not rewrite your PHP API scripts
+  RewriteRule ^login\.php$ - [L]
+  RewriteRule ^signup\.php$ - [L]
+  
+  # 2. NEW RULE: Do not rewrite anything in the 'assets' folder
+  RewriteRule ^assets/ - [L]
+  
+  # 3. Do not rewrite any other real files or folders
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  
+  # 4. For all other requests (React routes), send to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>

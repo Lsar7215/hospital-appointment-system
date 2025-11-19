@@ -1,162 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/animations.css">  
-    <link rel="stylesheet" href="css/main.css">  
-    <link rel="stylesheet" href="css/login.css">
-        
-    <title>Login</title>
+<?php
 
-</head>
-<body>
-    <?php
+// =========================================================================
+// TRADITIONAL PHP LOGIN SCRIPT
+// This script reads from $_POST and uses header() to redirect.
+// It does NOT return JSON.
+// =========================================================================
 
-    session_start();
+session_start();
+$_SESSION["user"]="";
+$_SESSION["usertype"]="";
 
+date_default_timezone_set('Europe/Zurich');
+$_SESSION["date"] = date('d-m-Y');
 
-    $_SESSION["user"]="";
-    $_SESSION["usertype"]="";
-    
-    date_default_timezone_set('Europe/Zurich');
-    $date = date('d-m-Y');
+include("connection.php"); 
 
-    $_SESSION["date"]=$date;
-    
-    include("connection.php");
+// We now check $_POST, just like your original file.
+if ($_POST) {
 
-    if($_POST){
+    // The 'name' attributes from Login.jsx are 'email' and 'password'
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-        $email=$_POST['useremail'];
-        $password=$_POST['userpassword'];
-        
-        $error='<label for="promter" class="form-label"></label>';
-
-        $result= $database->query("select * from webuser where email='$email'");
-        if($result->num_rows==1){
-            $utype=$result->fetch_assoc()['usertype'];
-            if ($utype=='p'){
-                $checker = $database->query("select * from patient where pemail='$email' and ppassword='$password'");
-                if ($checker->num_rows==1){
-
-                    //   patient dashbord
-                    $_SESSION['user']=$email;
-                    $_SESSION['usertype']='p';
-                    
-                    header('location: patient/index.php');
-
-                }else{
-                    $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
-                }
-
-            }elseif($utype=='a'){
-                $checker = $database->query("select * from admin where aemail='$email' and apassword='$password'");
-                if ($checker->num_rows==1){
-
-                    //   Admin dashbord
-                    $_SESSION['user']=$email;
-                    $_SESSION['usertype']='a';
-                    
-                    header('location: admin/index.php');
-
-                }else{
-                    $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
-                }
-
-
-            }elseif($utype=='d'){
-                $checker = $database->query("select * from doctor where docemail='$email' and docpassword='$password'");
-                if ($checker->num_rows==1){
-
-
-                    //   doctor dashbord
-                    $_SESSION['user']=$email;
-                    $_SESSION['usertype']='d';
-                    header('location: doctor/index.php');
-
-                }else{
-                    $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
-                }
-
-            }
-            
-        }else{
-            $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">We cant found any acount for this email.</label>';
-        }
-    }else{
-        $error='<label for="promter" class="form-label">&nbsp;</label>';
+    if (empty($email) || empty($password)) {
+        // Redirect back to login with an error
+        // You can add error handling here, e.g., header('Location: http://localhost:5173/login?error=empty');
+        // For now, we just fail silently or send to a generic error page.
+        echo "Email or password was empty.";
+        exit();
     }
 
-    ?>
+    if (!isset($database) || $database->connect_error) {
+        echo "Database connection failed.";
+        exit();
+    }
 
-    <center>
-    <div class="container">
-        <table border="0" style="margin: 0;padding: 0;width: 60%;">
-            <tr>
-                <td>
-                    <p class="header-text">Welcome Back!</p>
-                </td>
-            </tr>
-        <div class="form-body">
-            <tr>
-                <td>
-                    <p class="sub-text">Login with your details to continue</p>
-                </td>
-            </tr>
-            <tr>
-                <form action="" method="POST" >
-                <td class="label-td">
-                    <label for="useremail" class="form-label">Email: </label>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td">
-                    <input type="email" name="useremail" class="input-text" placeholder="Email Address" required>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td">
-                    <label for="userpassword" class="form-label">Password: </label>
-                </td>
-            </tr>
+    $stmt = $database->prepare("SELECT usertype FROM webuser WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-            <tr>
-                <td class="label-td">
-                    <input type="Password" name="userpassword" class="input-text" placeholder="Password" required>
-                </td>
-            </tr>
+    $login_success = false;
 
+    if ($result->num_rows == 1) {
+        $utype = $result->fetch_assoc()['usertype'];
+        $db_table = '';
+        $email_col = '';
+        $password_col = '';
 
-            <tr>
-                <td><br>
-                <?php echo $error ?>
-                </td>
-            </tr>
+        if ($utype == 'p') {
+            $db_table = 'patient';
+            $email_col = 'pemail';
+            $password_col = 'ppassword';
+        } elseif ($utype == 'a') {
+            $db_table = 'admin';
+            $email_col = 'aemail';
+            $password_col = 'apassword';
+        } elseif ($utype == 'd') {
+            $db_table = 'doctor';
+            $email_col = 'docemail';
+            $password_col = 'docpassword';
+        }
+        
+        if (!empty($db_table)) {
+            $stmt = $database->prepare("SELECT {$email_col} FROM {$db_table} WHERE {$email_col} = ? AND {$password_col} = ?");
+            $stmt->bind_param("ss", $email, $password);
+            $stmt->execute();
+            $checker = $stmt->get_result();
 
-            <tr>
-                <td>
-                    <input type="submit" value="Login" class="login-btn btn-primary btn">
-                </td>
-            </tr>
-        </div>
-            <tr>
-                <td>
-                    <br>
-                    <label for="" class="sub-text" style="font-weight: 280;">Don't have an account&#63; </label>
-                    <a href="signup.php" class="hover-link1 non-style-link">Sign Up</a>
-                    <br><br><br>
-                </td>
-            </tr>
-                        
-                        
-    
-                        
-                    </form>
-        </table>
+            if ($checker->num_rows == 1) {
+                // SUCCESS! Set session and redirect.
+                $_SESSION['user'] = $email;
+                $_SESSION['usertype'] = $utype;
+                
+                $base_url = "http://localhost/doctor-appointment-system";
+                
+                if ($utype == 'p') {
+                    header("Location: {$base_url}/patient/index.php");
+                } elseif ($utype == 'a') {
+                    header("Location: {$base_url}/admin/index.php");
+                } elseif ($utype == 'd') {
+                    header("Location: {$base_url}/doctor/index.php");
+                }
+                
+                $login_success = true;
+                exit(); // Always exit after a header redirect
+            }
+        }
+    }
 
-    </div>
-</center>
-</body>
-</html>
+    if (!$login_success) {
+        // If login failed, redirect back to the React login page with an error
+        // Note: Your React app is running on port 5173
+        $react_login_url = "http://localhost/doctor-appointment-system/login?error=invalid_credentials";
+        header("Location: " . $react_login_url);
+        exit();
+    }
+
+} else {
+    // If someone accesses login.php directly without POST data
+    $react_login_url = "http://localhost/doctor-appointment-system/login";
+    header("Location: " . $react_login_url);
+    exit();
+}
+
+?>

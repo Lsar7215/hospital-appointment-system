@@ -1,112 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/animations.css">  
-    <link rel="stylesheet" href="css/main.css">  
-    <link rel="stylesheet" href="css/signup.css">
-        
-    <title>Sign Up</title>
-    
-</head>
-<body>
 <?php
 
 session_start();
-
-$_SESSION["user"]="";
-$_SESSION["usertype"]="";
+include("connection.php"); 
 
 date_default_timezone_set('Europe/Zurich');
 $date = date('d-m-Y');
 
-$_SESSION["date"]=$date;
+// Base URL for React app (where it's running)
+$react_app_url = "http://localhost:5173"; 
+// Base URL for PHP app (for successful redirects) [Hopefully]
+$php_app_url = "http://localhost/doctor-appointment-system";
 
-if($_POST){
-    $_SESSION["personal"]=array(
-        'fname'=>$_POST['fname'],
-        'lname'=>$_POST['lname'],
-        'address'=>$_POST['address'],
-        'dob'=>$_POST['dob']
-    );
-    print_r($_SESSION["personal"]);
-    header("location: create-account.php");
+// Function to redirect back to React with an error
+function redirect_with_error($error_message) {
+    global $react_app_url;
+    header("Location: {$react_app_url}/signup?error=" . urlencode($error_message));
+    exit();
 }
 
+if ($_POST) {
+
+    // Get Data from React Form 
+    $email = $_POST['email'] ?? '';
+    $fname = $_POST['firstName'] ?? '';
+    $lname = $_POST['lastName'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirmPassword'] ?? '';
+    $phone = $_POST['phone'] ?? '';
+    $dob = $_POST['dob'] ?? '';
+
+    // Combine address fields from the form, will seperate once integrated new DB schema
+    $line1 = $_POST['line1'] ?? '';
+    $line2 = $_POST['line2'] ?? ''; 
+    $city = $_POST['city'] ?? '';
+    $state = $_POST['state'] ?? '';
+    $postal_code = $_POST['postalCode'] ?? '';
+    $country = $_POST['country'] ?? '';
+
+    // Create a full address string for the 'paddress' column
+    $full_address = $line1;
+    if (!empty($line2)) {
+        $full_address .= ", " . $line2;
+    }
+    $full_address .= ", " . $city . ", " . $state . " " . $postal_code . ", " . $country;
+
+    // Validation
+    if (empty($email) || empty($fname) || empty($lname) || empty($password) || empty($phone) || empty($dob) || empty($line1) || empty($city) || empty($state) || empty($postal_code) || empty($country)) {
+        redirect_with_error("Please fill out all required fields.");
+    }
+
+    if ($password !== $confirm_password) {
+        redirect_with_error("Passwords do not match.");
+    }
+
+    if (!isset($database) || $database->connect_error) {
+        redirect_with_error("Database connection failed. Please contact support.");
+    }
+
+    // Check if Email Already Exists in 'webuser' table
+    $stmt = $database->prepare("SELECT * FROM webuser WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        redirect_with_error("An account with this email already exists.");
+    }
+
+    // Insert into Database
+    $database->begin_transaction();
+    
+    try {
+        // Insert into 'patient' table
+        // SQL columns: pemail, pname, ppassword, paddress, pdob, ptel
+        $full_name = $fname . " " . $lname;
+        
+        $stmt_patient = $database->prepare("INSERT INTO patient (pemail, pname, ppassword, paddress, pdob, ptel) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt_patient->bind_param("ssssss", $email, $full_name, $password, $full_address, $dob, $phone);
+        $stmt_patient->execute();
+
+        // Insert into 'webuser' table
+        // SQL columns: email, usertype
+        $usertype = 'p'; // 'p' for patient
+        $stmt_webuser = $database->prepare("INSERT INTO webuser (email, usertype) VALUES (?, ?)");
+        $stmt_webuser->bind_param("ss", $email, $usertype);
+        $stmt_webuser->execute();
+
+        // If both queries were successful, commit the changes
+        $database->commit();
+
+        // --- 5. Success: Log In and Redirect to Dashboard ---
+        $_SESSION["user"] = $email;
+        $_SESSION["usertype"] = 'p';
+        
+        header("Location: {$php_app_url}/patient/index.php");
+        exit();
+
+    } catch (mysqli_sql_exception $exception) {
+        // If anything went wrong, roll back the changes
+        $database->rollback();
+        redirect_with_error("An error occurred during registration. Please try again.");
+    }
+
+} else {
+    // If someone accesses this page directly (not via POST)
+    header("Location: {$react_app_url}/signup");
+    exit();
+}
 ?>
-    <center>
-    <div class="container">
-        <table border="0">
-            <tr>
-                <td colspan="2">
-                    <p class="header-text">Let's Get Started</p>
-                    <p class="sub-text">Add Your Personal Details to Continue</p>
-                </td>
-            </tr>
-            <tr>
-                <form action="" method="POST" >
-                <td class="label-td" colspan="2">
-                    <label for="name" class="form-label">Name: </label>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td">
-                    <input type="text" name="fname" class="input-text" placeholder="First Name" required>
-                </td>
-                <td class="label-td">
-                    <input type="text" name="lname" class="input-text" placeholder="Last Name" required>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <label for="address" class="form-label">Address: </label>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <input type="text" name="address" class="input-text" placeholder="Address" required>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <label for="dob" class="form-label">Date of Birth: </label>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                    <input type="date" name="dob" class="input-text" required>
-                </td>
-            </tr>
-            <tr>
-                <td class="label-td" colspan="2">
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <input type="reset" value="Reset" class="login-btn btn-primary-soft btn" >
-                </td>
-                <td>
-                    <input type="submit" value="Next" class="login-btn btn-primary btn">
-                </td>
-
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <br>
-                    <label for="" class="sub-text" style="font-weight: 280;">Already have an account&#63; </label>
-                    <a href="login.php" class="hover-link1 non-style-link">Login</a>
-                    <br><br><br>
-                </td>
-            </tr>
-
-                    </form>
-            </tr>
-        </table>
-
-    </div>
-</center>
-</body>
-</html>

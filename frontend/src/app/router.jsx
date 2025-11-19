@@ -9,6 +9,8 @@ import Home from "../pages/public/Home";
 import Dashboard from "../pages/patient/PatientDashboard";
 import Account from "../pages/patient/Account"
 
+const basename = "/doctor-appointment-system";
+
 export const router = createBrowserRouter([
     {
         element:<AppShell/>,
@@ -23,4 +25,19 @@ export const router = createBrowserRouter([
 
         ]
     }
-])
+], { basename: basename })
+
+function NotFound() {
+  return (
+    <div style={{ padding: '2rem', textAlign: 'center', fontFamily: 'Inter, sans-serif' }}>
+      <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
+      <p className="text-lg mb-6">The page you are looking for does not exist.</p>
+      <a 
+        href="/doctor-appointment-system/" 
+        className="text-blue-600 hover:text-blue-800 underline"
+      >
+        Go back to Home
+      </a>
+    </div>
+  );
+}
