@@ -40,6 +40,7 @@ CREATE TABLE patient (
   medical_card_number varchar(45) NOT NULL,
   insurance_number varchar(45) DEFAULT NULL,
   check_password varchar(45) NOT NULL,
+  `status` varchar(45) DEFAULT NULL COMMENT 'first visit / follow up\n',
   PRIMARY KEY (patient_id),
   KEY fk_patient_email_idx (email),
   CONSTRAINT fk_patient_email FOREIGN KEY (email) REFERENCES `user` (email)
@@ -52,7 +53,7 @@ CREATE TABLE patient (
 
 LOCK TABLES patient WRITE;
 /*!40000 ALTER TABLE patient DISABLE KEYS */;
-INSERT INTO patient VALUES (1,'test','patient','12345','2003-09-05','femail','12345','test@patient.com','1234','12-34 egertem','test','Debrecen','Haj','Hungary','12345',NULL,'12345');
+INSERT INTO patient VALUES (1,'test','patient','12345','2003-09-05','femail','12345','test@patient.com','1234','12-34 egertem','test','Debrecen','Haj','Hungary','12345',NULL,'12345',NULL);
 /*!40000 ALTER TABLE patient ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -65,4 +66,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-12 10:02:29
+-- Dump completed on 2025-11-19 20:03:02
