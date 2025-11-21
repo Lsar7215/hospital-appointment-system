@@ -1,11 +1,5 @@
 html { font-size: 10px; }
 
-
-/* @media (max-width: 750px) {
-  html {
-    font-size: 2.5641025641vw !important;
-  }
-} */
 body{
   font-family:"Gill Sans", sans-serif;
 }
@@ -27,11 +21,6 @@ p{
 hr{
   border: thin solid rgba(47, 46, 48, 0.252);
 }
-
-/* :focus-visible {
-  outline: 3px solid rgba(46, 124, 246, 0.35);
-  outline-offset: 2px;
-} */
 
 
 /* =========================
@@ -98,11 +87,18 @@ hr{
 
 
 .card{
-    max-width: 70rem;
     border-radius: var(--radius-box);
     border: var(--border-card);
     background-color: var(--bg);
     padding: var(--px-sm);
+}
+
+.card--shadow {
+    box-shadow: var(--shadow-card);
+}
+
+.card--max-width {
+    max-width: 70rem;
 }
 
 .actions{
@@ -110,6 +106,7 @@ hr{
     gap: 1.2rem;
     align-items: center;
 }
+
 /* Optional link hover */
 input:hover, select:hover, button:hover, a:hover { opacity: 0.7; }
 
@@ -117,6 +114,7 @@ input, select, button, a{
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
 /*Form*/
 .form, .form__inner, .form__group,.form__group-inner{
     display: grid;
@@ -159,3 +157,59 @@ input, select, button, a{
     justify-content: center;
     gap: 0.5rem;
 }
+
+.btn--this-week{
+  background-color: #F8FAFC;
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.btn--see-more{
+    width: fit-content;
+    margin: var(--px-lg) auto;
+    display: block;
+}
+
+/*head*/
+.head__title{
+    color: var(--sub);
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+}
+
+.head__lead{
+    color: var(--sub);
+    margin-bottom: var(--px-lg);
+}
+
+/*header*/
+.section__header{
+    margin-bottom: 4.8rem;
+    text-align: center;
+}
+.section-header__title {
+    margin-bottom: var(--px-base);
+    color: var(--ink);
+}
+
+.section-header__lead {
+    color: var(--sub);
+}
+
+/*status | speciality span*/
+.badge{
+  font-size: 1.2rem;
+  padding: 0.2rem 0.8rem;
+  width: fit-content;
+  border-radius: var(--radius-box);
+  margin: 0.8rem 0;
+}
+
+/*profile image */
+.profile-image{
+    object-fit: cover;
+    border-radius: var(--radius-box);
+    width: 8rem;
+    height: 8rem;
+}
+

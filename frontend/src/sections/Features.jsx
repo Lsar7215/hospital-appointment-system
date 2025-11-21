@@ -7,9 +7,9 @@ export default function Features() {
     return (
     <section id='features' className="features">
         <div className='features__inner container'>
-            <header className='features__header'>
-                 <h2 className='features__header__title'>Everything you need to manage appointments</h2>
-                 <p className='features__header__text'>A complete healthcare booking solution designed for patients and providers.</p>
+            <header className='section__header'>
+                 <h2 className='section-header__title'>Everything you need to manage appointments</h2>
+                 <p className='section-header__lead'>A complete healthcare booking solution designed for patients and providers.</p>
             </header>
            
             <div className='features__grid'>

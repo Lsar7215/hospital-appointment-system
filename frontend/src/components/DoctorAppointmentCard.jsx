@@ -8,10 +8,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import patientImage from "../assets/images/patient.png";
 
-export default function AppointmentCard({
+export default function DoctorAppointmentCard({
+  appointmentId,
   patientState, 
-  variant, 
-  key,
+  variant,
   appointmentDate, 
   appointmentTime, 
   appointmentLocation, 
@@ -62,29 +62,28 @@ export default function AppointmentCard({
 
     const saveNote = () => {
       const text = draft.trim();
-      onSaveNote?.(key, text);
+      onSaveNote?.(appointmentId, text);
       // after save, go to view mode
       setIsEditing(false);
     };
 
-
     return(
         <article className="doctor-card card">
             <div className="doctor-card__top">
-                <img className="doctor-card__profile" src={patientImage} alt="patient-image" width={72} height={72}/>
+                <img className="profile-image" src={patientImage} alt="patient-image" width={72} height={72}/>
                 <div className="doctor-card__info">
                     <h3 className="doctor-card__name">{p_fname} {p_lname}
 
-                    <span className={`apt-card__status ${variant==='Upcoming' ? 'apt-card__status--booked' :
-                                                          variant==='Cancelled' ?'apt-card__status--cancelled':
-                                                          variant==='Completed' ?'apt-card__status--completed':
-                                                          ''}`}>{variant}
+                    <span className={`badge ${variant==='upcoming' ? 'badge--booked' :
+                                                          variant==='cancelled' ?'badge--cancelled':
+                                                          variant==='completed' ?'badge--completed':
+                                                          ''}`}>{variant.charAt(0).toUpperCase() + variant.slice(1)}
                     </span>
                     </h3>
                     {patientState === "first visit"?(
-                        <span className="patient__status patient__status--first-visit">{patientState}</span>
+                        <span className="badge badge--first-visit">{patientState}</span>
                     ):(
-                        <span className="patient__status patient__status--follow-up">{patientState}</span>
+                        <span className="badge badge--follow-up">{patientState}</span>
                     )}
 
                     <div className="apt-detail">
@@ -97,39 +96,6 @@ export default function AppointmentCard({
                             <span>{appointmentLocation}</span>
                         </p>
                     </div>
-                    {variant==="upcoming"?(
-                    <div className="actions">
-                        <a href={`mailto:${patient.email}`}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="rgb(29,78,216)"><path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/></svg></a>
-                        <a href={`tel:+${patient.phone}`}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="rgb(29,78,216)"><path d="M162-120q-18 0-30-12t-12-30v-162q0-13 9-23.5t23-14.5l138-28q14-2 28.5 2.5T342-374l94 94q38-22 72-48.5t65-57.5q33-32 60.5-66.5T681-524l-97-98q-8-8-11-19t-1-27l26-140q2-13 13-22.5t25-9.5h162q18 0 30 12t12 30q0 125-54.5 247T631-329Q531-229 409-174.5T162-120Zm556-480q17-39 26-79t14-81h-88l-18 94 66 66ZM360-244l-66-66-94 20v88q41-3 81-14t79-28Zm358-356ZM360-244Z"/></svg></a>
-                        <button className="btn btn--ghost"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="rgb(29,78,216)"><path d="M444-240h72v-108h108v-72H516v-108h-72v108H336v72h108v108ZM263.72-96Q234-96 213-117.15T192-168v-624q0-29.7 21.15-50.85Q234.3-864 264-864h312l192 192v504q0 29.7-21.16 50.85Q725.68-96 695.96-96H263.72ZM528-624v-168H264v624h432v-456H528ZM264-792v189-189 624-624Z"/></svg></button>
-                        <React.Fragment>
-                          <Button variant="outlined" onClick={handleClickOpen} className="btn btn--cancel">
-                            Cancel
-                          </Button>
-                          <Dialog
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                          >
-                            <DialogTitle id="alert-dialog-title">
-                              {"Confirm cancellation"}
-                            </DialogTitle>
-                            <DialogContent>
-                              <DialogContentText id="alert-dialog-description">
-                                This action will cancel the appointment.
-                              </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                              <Button onClick={handleClose}>Back</Button>
-                              <Button onClick={handleClose} autoFocus>
-                                Cancel
-                              </Button>
-                            </DialogActions>
-                          </Dialog>
-                        </React.Fragment>  
-                    </div>        
-                    ): (
                     <div className="actions">
                         <a href= {`mailto:${p_email}`}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="rgb(29,78,216)"><path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/></svg></a>
                         <a href={`tel:+${p_phone}`}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="rgb(29,78,216)"><path d="M162-120q-18 0-30-12t-12-30v-162q0-13 9-23.5t23-14.5l138-28q14-2 28.5 2.5T342-374l94 94q38-22 72-48.5t65-57.5q33-32 60.5-66.5T681-524l-97-98q-8-8-11-19t-1-27l26-140q2-13 13-22.5t25-9.5h162q18 0 30 12t12 30q0 125-54.5 247T631-329Q531-229 409-174.5T162-120Zm556-480q17-39 26-79t14-81h-88l-18 94 66 66ZM360-244l-66-66-94 20v88q41-3 81-14t79-28Zm358-356ZM360-244Z"/></svg></a>
@@ -140,7 +106,6 @@ export default function AppointmentCard({
                           </Button>
                         </div>
 
-                        {/* Unified Note modal */}
                         <Dialog open={openNote} onClose={closeEditor} fullWidth maxWidth="sm">
                           <DialogTitle>
                             {isEditing
@@ -181,9 +146,37 @@ export default function AppointmentCard({
                             )}
                           </DialogActions>
                         </Dialog>
-                        
+
+                        {variant==="upcoming" && (
+                            <React.Fragment>
+                              <Button variant="outlined" onClick={handleClickOpen} className="btn btn--cancel" >
+                                Cancel
+                              </Button>
+                              <Dialog
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                              >
+                                <DialogTitle id="alert-dialog-title">
+                                  {"Confirm cancellation"}
+                                </DialogTitle>
+                                <DialogContent>
+                                  <DialogContentText id="alert-dialog-description">
+                                    This action will cancel the appointment.
+                                  </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                  <Button onClick={handleClose}>Back</Button>
+                                  <Button onClick={handleClose} autoFocus>
+                                    Cancel
+                                  </Button>
+                                </DialogActions>
+                              </Dialog>
+                            </React.Fragment>       
+                        )}
+
                     </div>
-                    )}
                 </div>
             </div>
         </article>

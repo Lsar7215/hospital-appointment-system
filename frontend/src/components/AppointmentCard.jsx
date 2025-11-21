@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -7,43 +7,64 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import DoctorImage from "../assets/images/doctor1.png";
+import BookingModal from "./BookingModal"
 
-export default function AppointmentCard({variant, a_Date, a_Time, a_Room, d_firstName, d_lastName, d_specialist}){
-    // const doctor = {
-    //     firstName: "FirstName",
-    //     lastName: "LastName",
-    //     specialist: "SPECIALIST",
-    // }
+export default function AppointmentCard({
+  variant,
+  a_Date, 
+  a_Time, 
+  a_Room, 
+  d_id, 
+  d_firstName, 
+  d_lastName, 
+  d_specialist
+}){
 
-    // const aptDetails = {
-    //     date: "Tue, Nov 18, 2025",
-    //     time: "09:30",
-    //     room: "Debrecen Clinic A, Room 3",
-    // }
 
-    //React -dialog
-    const [open, setOpen] = React.useState(false);
-    const handleClickOpen = () => {
-        setOpen(true);
+    const [cancelOpen, setCancelOpen] = useState(false);
+    const [bookingModalOpen, setBookingModalOpen] = useState(false);
+    const [bookingMode, setBookingMode] = useState("book");
+
+    const getRawDate = (dateStr) => {
+      try {
+        const date = new Date(dateStr);
+        return date.toISOString().split('T')[0];
+      } catch {
+        return new Date().toISOString().split('T')[0];
+      }
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleRescheduleClick = () => {
+      setBookingMode("reschedule");
+      setBookingModalOpen(true);
+    };
+
+    const handleBookAgainClick = () => {
+      setBookingMode("book");
+      setBookingModalOpen(true);
+    };
+
+    const currentAppointment = {
+      date: a_Date,
+      time: a_Time,
+      rawDate: getRawDate(a_Date), // For date picker
+      room: a_Room
     };
 
     return(
+      <>
         <article className="doctor-card card">
             <div className="doctor-card__top">
-                <img className="doctor-card__profile"src={DoctorImage} alt={`Dr. ${d_firstName} ${d_lastName}`} width={72} height={72}/>
+                <img className="profile-image"src={DoctorImage} alt={`Dr. ${d_firstName} ${d_lastName}`} width={72} height={72}/>
                 <div className="doctor-card__info">
                     <h3 className="doctor-card__name">{`Dr. ${d_firstName} ${d_lastName}`}                   
                     {variant==="upcoming"?(
-                        <span className="apt-card__status apt-card__status--booked">Booked</span>       
+                        <span className="badge badge--booked">Upcoming</span>       
                     ): (
-                        <span className="apt-card__status apt-card__status--completed">Completed</span>
+                        <span className="badge badge--completed">Completed</span>
                     )}
                     </h3>
-                    <p className="doctor-card__specialty">{d_specialist}</p>
+                    <p className="badge__specialty badge">{d_specialist}</p>
                     <div className="apt-detail">
                         <p>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343"><path d="M200-640h560v-80H200v80Zm0 0v-80 80Zm0 560q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v227q-19-9-39-15t-41-9v-43H200v400h252q7 22 16.5 42T491-80H200Zm520 40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Zm67-105 28-28-75-75v-112h-40v128l87 87Z"/></svg>
@@ -58,14 +79,13 @@ export default function AppointmentCard({variant, a_Date, a_Time, a_Room, d_firs
             </div>
             {variant==="upcoming"?(
             <div className="actions">
-                <button className="btn btn--ghost">Reschedule</button>
-                <React.Fragment>
-                  <Button variant="outlined" onClick={handleClickOpen} className="btn btn--cancel">
+                <button className="btn btn--ghost" onClick={handleRescheduleClick}>Reschedule</button>
+                  <Button variant="outlined" onClick={() => setCancelOpen(true)} className="btn btn--cancel">
                     Cancel
                   </Button>
                   <Dialog
-                    open={open}
-                    onClose={handleClose}
+                    open={cancelOpen}
+                    onClose={() => setCancelOpen(false)}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                   >
@@ -73,25 +93,41 @@ export default function AppointmentCard({variant, a_Date, a_Time, a_Room, d_firs
                       {"Cancel your appointment?"}
                     </DialogTitle>
                     <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
+                      <DialogContentText id="alert-dialog-description" style={{ color: '#000' }}>
                         You’re about to cancel your appointment with Dr.{d_firstName} {d_lastName} on {a_Date} at {a_Time}.
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={handleClose}>Back</Button>
-                      <Button onClick={handleClose} autoFocus>
+                      <Button onClick={() => setCancelOpen(false)}>Back</Button>
+                      <Button onClick={() => setCancelOpen(false)} autoFocus>
                         Cancel appointment
                       </Button>
                     </DialogActions>
                   </Dialog>
-                </React.Fragment>
-
             </div>        
             ): (
             <div className="actions">
-                <button className="btn btn--ghost">Book again</button>
+              <button
+                className="btn btn--ghost"
+                onClick={handleBookAgainClick}
+              >Book again</button>
             </div>
             )}
         </article>
+
+      <BookingModal
+        open={bookingModalOpen}
+        onClose={() => setBookingModalOpen(false)}
+        doctor={{
+          id: d_id,
+          firstName: d_firstName,
+          lastName: d_lastName,
+          specialist: d_specialist
+        }}
+        mode={bookingMode}
+        currentAppointment={bookingMode === "reschedule" ? currentAppointment : null}
+      />
+    </>
+        
     )
 }

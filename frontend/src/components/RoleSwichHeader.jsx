@@ -7,7 +7,6 @@ export default function RoleSwichHeader() {
                 <NavLink className="header__nav-link" to="/">Guest Page</NavLink>
                 <NavLink className="header__nav-link" to="/patient/dashboard">Patient Page</NavLink>
                 <NavLink className="header__nav-link" to="/doctorpage/appointments">Doctor Page</NavLink>
-                <NavLink className="header__nav-link" to="/admin">Admin Page</NavLink>
             </div>
         </div>
     )

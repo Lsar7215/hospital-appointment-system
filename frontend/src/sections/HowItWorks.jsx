@@ -35,9 +35,9 @@ export default function HowItWorks(){
     return(
         <section id='How-it-works' className="how-it-works">
             <div className='how-it-works__inner container'>
-                <header className='how-it-works__header'>
-                    <h2 className='how-it-works__title'>How it works</h2>
-                    <p className='how-it-works__lead'>Book your appointment in four simple steps.</p>
+                <header className='section__header'>
+                    <h2 className='section-header__title'>How it works</h2>
+                    <p className='section-header__lead'>Book your appointment in four simple steps.</p>
                 </header>
                 <div className='how-it-works__grid'>
                     {steps.map((step)=>(

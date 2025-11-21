@@ -8,7 +8,6 @@ export default function Header() {
         if (pathname === "/" || pathname.startsWith("/signup") || pathname.startsWith("/login")) return "lp";
         if (pathname.startsWith("/patient")) return "patient";
         if (pathname.startsWith("/doctorpage"))  return "doctor";
-        if (pathname.startsWith("/admin"))   return "admin";
         return "default";
     })();
 
@@ -23,18 +22,15 @@ export default function Header() {
                 <nav className="header__nav">
                 {variant === "lp" &&
                     (<>
-                        <a className="header__nav-link" href="/#top">Top</a>
-                        <a className="header__nav-link" href="/#features">Features</a>
-                        <a className="header__nav-link" href="/#search-preview">Find your doctor</a>
-                        <a className="header__nav-link" href="/#book">book</a>
-                        <a className="header__nav-link" href="/#How-it-works">How it works</a>
+                        <a className="header__nav-link" href="#top">Top</a>
+                        <a className="header__nav-link" href="#features">Features</a>
+                        <a className="header__nav-link" href="#How-it-works">How it works</a>
                     </>
                 )}
                  
                 {variant === "patient" &&
                     (
                         <>
-                            <NavLink className="header__nav-link" to="/">Home</NavLink>
                             <NavLink className="header__nav-link" to="/patient/dashboard">My appointments</NavLink>
                             <NavLink className="header__nav-link" to="/patient/doctors">Find doctors</NavLink>
                         </>
@@ -44,20 +40,8 @@ export default function Header() {
                 {variant === "doctor" &&
                     (
                         <>
-                            <NavLink className="header__nav-link" to="/">Home</NavLink>
-                            <NavLink className="header__nav-link" to="doctorpage/appointments">Appointments(Doctor)</NavLink>
+                            <NavLink className="header__nav-link" to="/doctorpage/appointments">Appointments(Doctor)</NavLink>
                             <NavLink className="header__nav-link" to="/doctorpage/schedule">Schedule</NavLink>
-                        </>
-                    )
-                }
-
-
-                {variant === "admin" &&
-                    (
-                        <>
-                            <NavLink className="header__nav-link" to="/">Dashboard</NavLink>
-                            <NavLink className="header__nav-link" to="/">Doctors</NavLink>
-                            <NavLink className="header__nav-link" to="/">Reports</NavLink>
                         </>
                     )
                 }
@@ -82,15 +66,6 @@ export default function Header() {
                     }
 
                     {variant === "doctor" &&
-                        (
-                            <>
-                                <Link className="btn btn--ghost header__btn" to="/login">Sign out</Link> 
-                            </>
-                        )
-                    }
-
-
-                    {variant === "admin" &&
                         (
                             <>
                                 <Link className="btn btn--ghost header__btn" to="/login">Sign out</Link> 

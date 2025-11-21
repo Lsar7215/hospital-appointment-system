@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import AppShell from "./AppShell";
 
-import Doctors from '../pages/public/Doctors';
+import Doctors from '../pages/patient/Doctors';
 import Doctor from '../pages/public/Doctor'
 import Signup from '../pages/public/Signup'
 import Login from '../pages/public/Login';
@@ -18,15 +18,14 @@ export const router = createBrowserRouter([
             // Public
             {path:"/", element:<Home />},
             {path:"/doctors", element:<Doctors/>},
-            {path:"/doctor", element:<Doctor/>},
+            {path:"/doctor/:id", element:<Doctor/>},
             // {path:"/doctor/:id", element:<Doctor/>},
             {path:"/signup", element:<Signup/>},
             {path:"/login", element:<Login/>},
             // Patient
             {path:"/patient/dashboard", element:<Dashboard/>},
             {path:"/patient/doctors", element:<Doctors/>},
-            {path:"/patient/doctor", element:<Doctor/>},
-            // {path:"/patient/doctor/:id", element:<Doctor/>},
+            {path:"/patient/doctor/:id", element:<Doctor/>},
             {path:"/patient/account", element:<Account/>},
             // Doctor 
             {path:"/doctorpage/appointments", element:<Appointments/>},

@@ -20,14 +20,6 @@
     gap: var(--px-xs);
 }
 
-.dashboard__lead{
-    color: var(--sub);
-}
-
-.dashboard__btn{
-    width: fit-content;
-    margin: auto;
-}
 /*Appointment*/
 .apt-detail{
     margin: var(--px-xs) 0;
@@ -43,25 +35,18 @@
     align-items: center;
 }
 
-.apt-card__status{
-    font-size: 1.2rem;
-    margin: 0.8rem 0;
-    padding: 0.2rem 0.8rem;
-    width: fit-content;
-    border-radius: var(--radius-box);
-} 
 
-.apt-card__status--completed{
+.badge--completed{
   background: #DCFCE7;
   color: #166534;
 }
 
-.apt-card__status--booked{
+.badge--booked{
   background: #E0F2FE;
   color: #0369A1;
 }
 
-.apt-card__status--cancelled {
+.badge--cancelled {
   background: #FEE2E2;
   color: #991B1B;
 }
@@ -103,3 +88,11 @@
     gap: var(--px-base);
 }
 
+/*Find doctors*/
+
+
+/*Booking Modal*/
+.booking-modal__date-picker{
+    font-size: var(--px-lg);
+    margin-bottom: var(--px-xs);
+}

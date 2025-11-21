@@ -4,7 +4,7 @@ export default function Login(){
     return(
         <div className='login'>
             <section className='login__section'>
-                <div className='auth__inner container '>
+                <div className='card card--shadow auth__inner container '>
                     <header className='auth__header'>
                         <img className='auth__icon' src={LoginIcon} alt="" />
                         <div className='auth__headings'>

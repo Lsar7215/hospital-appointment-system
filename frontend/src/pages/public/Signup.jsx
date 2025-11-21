@@ -5,7 +5,7 @@ export default function Signup(){
     return(
         <div className='auth'>
             <section className='auth__section'>
-                <div className='auth__inner container'>
+                <div className='auth__inner card card--shadow container'>
                     <header className='auth__header'>
                         <img className='auth__icon' src={lockIcon} alt="" />
                         <div className='auth__headings'>

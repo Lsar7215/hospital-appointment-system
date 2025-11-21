@@ -1,71 +1,28 @@
+import {useState} from "react";
 import AppointmentCard from "../../components/AppointmentCard"
+import { getPatientAppointments } from '../../data/mockData'
 
 export default function PatientDashboard(){
-
-    const patient = {
-        patient_id: "P001ABC",
-        firstName: "Liam",
-        last_name: "Kovacs",
-        phone: "+36 70 123 4567",
-        email: "liam.kovacs@example.com",
-        };
-
-    const appointments = [
-    {
-        aptDetails: {
-        date: "Tue, Nov 18, 2025",
-        time: "09:30",
-        room: "Debrecen Clinic A, Room 3",
-        status: "upcoming",
-        },
-        doctor: {
-        firstName: "Eszter",
-        lastName: "Farkas",
-        specialist: "Dermatologist",
-        },
-    },
-    {
-        aptDetails: {
-        date: "Wed, Nov 19, 2025",
-        time: "11:15",
-        room: "Budapest Clinic B, Room 12",
-        status: "completed",
-        },
-        doctor: {
-        firstName: "Balint",
-        lastName: "Toth",
-        specialist: "Cardiologist",
-        },
-    },
-    {
-        aptDetails: {
-        date: "Fri, Nov 21, 2025",
-        time: "08:00",
-        room: "Szeged Health Center, Room 5",
-        status: "completed",
-        },
-        doctor: {
-        firstName: "Katalin",
-        lastName: "Barta",
-        specialist: "Neurologist",
-        },
-    },
-    {
-        aptDetails: {
-        date: "Mon, Nov 24, 2025",
-        time: "16:45",
-        room: "Győr Medical Center, Room 9",
-        status: "completed",
-        },
-        doctor: {
-        firstName: "Andras",
-        lastName: "Kiss",
-        specialist: "Orthopedic Surgeon",
-        },
-    },
-    ];
+    //demo
+    const patientId = 1;
+    const first_name = "Laura";
+    
+    const appointments = getPatientAppointments(patientId);
 
 
+    const upcomingAppointments = appointments.filter(
+        (appointment) => appointment.appointment_status === "upcoming"
+    );
+
+    const historyAppointments = appointments.filter(
+        (appointment) => appointment.appointment_status !== "upcoming"
+    );
+
+    const [showAllHistory, setShowAllHistory] = useState(false);
+
+    const visibleHistoryAppointments = showAllHistory
+        ? historyAppointments
+        : historyAppointments.slice(0, 5);
 
 
     return(
@@ -73,8 +30,8 @@ export default function PatientDashboard(){
             <div className="dashboard__inner container">
                 <main className="dashboard__main">
                     <header className="dashboard__header">
-                        <h1 className="dashboard__title">Hi, {patient.firstName}</h1>
-                        <p className="dashboard__lead">Manage all your bookings in one place.</p>
+                        <h1 className="head__title">Hi, {first_name}</h1>
+                        <p className="head__lead">Manage all your bookings in one place.</p>
                     </header>
 
                     <section className="dashboard__section">
@@ -84,12 +41,14 @@ export default function PatientDashboard(){
                             </h2>
                         </div>
                         <div className="dashboard__list">
-                            {appointments.map(appointment => (appointment.aptDetails.status === "upcoming") && (
+                            {upcomingAppointments.map(appointment => (
                                 <AppointmentCard 
-                                    variant={appointment.aptDetails.status}  
-                                    a_Date={appointment.aptDetails.date} 
-                                    a_Time={appointment.aptDetails.time} 
-                                    a_Room={appointment.aptDetails.room} 
+                                    key={appointment.patient_id}
+                                    variant={appointment.appointment_status}  
+                                    a_Date={appointment.date} 
+                                    a_Time={appointment.time} 
+                                    a_Room={appointment.room}
+                                    d_id={appointment.doctor.id} 
                                     d_firstName={appointment.doctor.firstName} 
                                     d_lastName={appointment.doctor.lastName} 
                                     d_specialist={appointment.doctor.specialist}
@@ -105,20 +64,27 @@ export default function PatientDashboard(){
                             </h2>
                         </div>
                         <div className="dashboard__list">
-                            {appointments.map(appointment => (appointment.aptDetails.status !== "upcoming") && (
+                            {visibleHistoryAppointments.map(appointment => (appointment.appointment_status !== "upcoming") && (
                                 <AppointmentCard 
-                                    variant={appointment.aptDetails.status}  
-                                    a_Date={appointment.aptDetails.date} 
-                                    a_Time={appointment.aptDetails.time} 
-                                    a_Room={appointment.aptDetails.room} 
+                                    variant={appointment.appointment_status}  
+                                    a_Date={appointment.date} 
+                                    a_Time={appointment.time} 
+                                    a_Room={appointment.room} 
+                                    d_id={appointment.doctor.id}
                                     d_firstName={appointment.doctor.firstName} 
                                     d_lastName={appointment.doctor.lastName} 
                                     d_specialist={appointment.doctor.specialist}
                                 />
                             ))}
                         </div>
+                        {historyAppointments.length > 5 && (
+                            <button 
+                                className="btn btn--ghost btn--see-more"
+                                onClick={()=> setShowAllHistory((prev) => !prev)}
+                            >{showAllHistory ? "See less" : "See more"}</button>
+                        )
+                        }
                     </section>
-                    <button className="btn btn--ghost dashboard__btn">See more</button>
                 </main>
             </div>
         </div>
