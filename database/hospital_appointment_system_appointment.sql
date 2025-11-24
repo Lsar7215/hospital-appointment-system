@@ -28,7 +28,8 @@ CREATE TABLE appointment (
   d_id int NOT NULL,
   appointment_date date NOT NULL,
   appointment_time time NOT NULL,
-  `status` varchar(45) NOT NULL,
+  room varchar(45) NOT NULL,
+  `status` varchar(45) NOT NULL COMMENT 'upcoming / completed / canceled',
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (appointment_id),
   KEY fk_doctor_idx (d_id),
@@ -44,7 +45,7 @@ CREATE TABLE appointment (
 
 LOCK TABLES appointment WRITE;
 /*!40000 ALTER TABLE appointment DISABLE KEYS */;
-INSERT INTO appointment VALUES (1,1,1,'2025-10-21','12:00:00','booked',NULL);
+INSERT INTO appointment VALUES (1,1,1,'2025-10-21','12:00:00','','booked',NULL);
 /*!40000 ALTER TABLE appointment ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-12 10:02:29
+-- Dump completed on 2025-11-19 20:03:03

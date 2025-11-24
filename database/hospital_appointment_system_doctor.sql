@@ -28,6 +28,7 @@ CREATE TABLE doctor (
   first_name varchar(45) NOT NULL,
   last_name varchar(45) NOT NULL,
   specialization varchar(45) NOT NULL DEFAULT 'Cardiologist',
+  room varchar(45) DEFAULT NULL,
   about varchar(500) DEFAULT NULL,
   PRIMARY KEY (doctor_id),
   KEY fk_doctor_email_idx (email),
@@ -41,7 +42,7 @@ CREATE TABLE doctor (
 
 LOCK TABLES doctor WRITE;
 /*!40000 ALTER TABLE doctor DISABLE KEYS */;
-INSERT INTO doctor VALUES (1,'doctor@doctor.com','Takeshi','Tanaka','Cardiologist',NULL);
+INSERT INTO doctor VALUES (1,'doctor@doctor.com','Takeshi','Tanaka','Cardiologist',NULL,NULL);
 /*!40000 ALTER TABLE doctor ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-12 10:02:29
+-- Dump completed on 2025-11-19 20:03:02
