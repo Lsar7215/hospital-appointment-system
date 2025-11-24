@@ -15,11 +15,11 @@ export default function Login(){
     );
 
     return(
-        <div className='login min-h-screen bg-gray-100 flex items-center justify-center p-4'>
-            <section className='login__section w-full max-w-md'>
-                <div className='auth__inner container bg-white p-8 rounded-xl shadow-2xl'>
-                    <header className='auth__header text-center mb-6'>
-                        <LoginIcon />
+        <div className='login'>
+            <section className='login__section'>
+                <div className='card card--shadow auth__inner container '>
+                    <header className='auth__header'>
+                        <img className='auth__icon' src={LoginIcon} alt="" />
                         <div className='auth__headings'>
                             <h1 className='auth__title text-2xl font-bold text-gray-800'>Log in to your account</h1>
                             <p className='auth__lead text-sm text-gray-500'>Access your bookings and manage your appointments.</p>

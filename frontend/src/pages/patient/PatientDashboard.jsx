@@ -1,40 +1,90 @@
+import {useState} from "react";
 import AppointmentCard from "../../components/AppointmentCard"
+import { getPatientAppointments } from '../../data/mockData'
 
 export default function PatientDashboard(){
-    const user = {firstName: "NAME"}
+    //demo
+    const patientId = 1;
+    const first_name = "Laura";
+    
+    const appointments = getPatientAppointments(patientId);
+
+
+    const upcomingAppointments = appointments.filter(
+        (appointment) => appointment.appointment_status === "upcoming"
+    );
+
+    const historyAppointments = appointments.filter(
+        (appointment) => appointment.appointment_status !== "upcoming"
+    );
+
+    const [showAllHistory, setShowAllHistory] = useState(false);
+
+    const visibleHistoryAppointments = showAllHistory
+        ? historyAppointments
+        : historyAppointments.slice(0, 5);
+
+
     return(
-        <div className="patient">
-            <div className="patient__inner container">
-                <main className="patient__main">
-                    <header className="patient__header">
-                        <h1 className="patient__title">Hi, {user.firstName}</h1>
-                        <p className="patient__lead">Manage all your bookings in one place.</p>
+        <div className="dashboard">
+            <div className="dashboard__inner container">
+                <main className="dashboard__main">
+                    <header className="dashboard__header">
+                        <h1 className="head__title">Hi, {first_name}</h1>
+                        <p className="head__lead">Manage all your bookings in one place.</p>
                     </header>
 
-                    <section className="patient__section">
+                    <section className="dashboard__section">
                         <div className="section-head">
                             <h2 className="section-head__title">
                                 Upcoming appointments
                             </h2>
                         </div>
-                        <div className="patient__list">
-                            <AppointmentCard variant="upcoming"/>
+                        <div className="dashboard__list">
+                            {upcomingAppointments.map(appointment => (
+                                <AppointmentCard 
+                                    key={appointment.patient_id}
+                                    variant={appointment.appointment_status}  
+                                    a_Date={appointment.date} 
+                                    a_Time={appointment.time} 
+                                    a_Room={appointment.room}
+                                    d_id={appointment.doctor.id} 
+                                    d_firstName={appointment.doctor.firstName} 
+                                    d_lastName={appointment.doctor.lastName} 
+                                    d_specialist={appointment.doctor.specialist}
+                                />
+                            ))}
                         </div>
                     </section>
                     <hr />
-                    <section className="patient__section">
+                    <section className="dashboard__section">
                         <div className="section-head">
                             <h2 className="section-head__title">
                                 Appointment history
                             </h2>
                         </div>
-                        <div className="patient__list">
-                            <AppointmentCard variant="past"/>
-                            <AppointmentCard variant="past"/>
-                            <AppointmentCard variant="past"/>
+                        <div className="dashboard__list">
+                            {visibleHistoryAppointments.map(appointment => (appointment.appointment_status !== "upcoming") && (
+                                <AppointmentCard 
+                                    variant={appointment.appointment_status}  
+                                    a_Date={appointment.date} 
+                                    a_Time={appointment.time} 
+                                    a_Room={appointment.room} 
+                                    d_id={appointment.doctor.id}
+                                    d_firstName={appointment.doctor.firstName} 
+                                    d_lastName={appointment.doctor.lastName} 
+                                    d_specialist={appointment.doctor.specialist}
+                                />
+                            ))}
                         </div>
+                        {historyAppointments.length > 5 && (
+                            <button 
+                                className="btn btn--ghost btn--see-more"
+                                onClick={()=> setShowAllHistory((prev) => !prev)}
+                            >{showAllHistory ? "See less" : "See more"}</button>
+                        )
+                        }
                     </section>
-                    <button className="btn btn--ghost patient__btn">See more</button>
                 </main>
             </div>
         </div>

@@ -1,42 +1,64 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import downIcon from '../../assets/images/icons/down_g.png'
+import {  getPatientAccount, savePatientAccount, EU_COUNTRIES  } from '../../data/mockData'
 export default function Account(){
-    const [data, setData] = useState({
-    firstName: "FirstName",
-    lastName: "LastName",
-    phone: "+36 70 000 0000",
-    email: "example@mail.com",
-    dob: "2000-09-09",
-    medicalCard: "0000000",
-    insurance: "0000000",
-    address: {
-      line1: "Street",
-      line2: "Apartment",
-      city: "Debrecen",
-      state: "Hajdú-Bihar",
-      postal: "4032",
-      country: "Hungary",
-    },
-  });
 
-  const [editing, setEditing] = useState(false);
-  const [form, setForm] = useState(data);
+    //demo 
+    const currentPatientId = "PT001"; 
+    const [data, setData] = useState(null);
+    const [editing, setEditing] = useState(false);
+    const [form, setForm] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
 
-  const onEdit = () => {
-    setForm(data);    
-    setEditing(true);   
-  };
+    useEffect(() => {
+        const loadPatientData = async () => {
+        setLoading(true);
+            try {
+                // demo
+                const patientData = getPatientAccount(currentPatientId);
+                
+                setData(patientData);
+                setForm(patientData);
+            } catch (error) {
+                console.error('Error loading patient data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-  const onCancel = () => {
-    setEditing(false);  
-  };
+        loadPatientData();
+    }, []);
 
-  const onSave = (e) => {
-    e.preventDefault();
-    setData(form);
-    setEditing(false);
-  };
+
+    const onEdit = () => {
+        setForm(data);    
+        setEditing(true);   
+    };
+
+    const onCancel = () => {
+        setForm(data);
+        setEditing(false);  
+    };
+
+    const onSave = async (e) => {
+        e.preventDefault();
+        setSaving(true);
+        
+        try {
+            // demo
+            await savePatientAccount(currentPatientId, form);
+            setData(form);
+            setEditing(false);
+            alert('Profile updated successfully!');
+        } catch (error) {
+            console.error('Error saving patient data:', error);
+            alert('Failed to save changes. Please try again.');
+        } finally {
+            setSaving(false);
+        }
+    };
 
   const onChange = (path) => (e) => {
     const value = e.target.value;
@@ -47,6 +69,28 @@ export default function Account(){
       setForm((prev) => ({ ...prev, [path]: value }));
     }
   };
+
+    // Loading state
+    if (loading) {
+        return (
+        <section className="profile">
+            <div className="profile__inner container card">
+            <p>Loading profile...</p>
+            </div>
+        </section>
+        );
+    }
+
+    // No data found
+    if (!data) {
+        return (
+        <section className="profile">
+            <div className="profile__inner container card">
+            <p>Patient profile not found.</p>
+            </div>
+        </section>
+        );
+    }
 
     return(
         <section className="profile">
@@ -60,49 +104,49 @@ export default function Account(){
                     <>
                         <div className='profile-card__info'>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>Phone number</label>
+                                <label className='profile-card__label'>Phone number</label>
                                 <p className='profile-card__value'>{data.phone}</p>
                             </div>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>Email</label>
+                                <label className='profile-card__label'>Email</label>
                                 <p className='profile-card__value'>{data.email}</p>
                             </div>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>Date of birth</label>
+                                <label className='profile-card__label'>Date of birth</label>
                                 <p className='profile-card__value'>{data.dob}</p>
                             </div>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>Medical card Number</label>
+                                <label className='profile-card__label'>Medical card Number</label>
                                 <p className='profile-card__value'>{data.medicalCard}</p>
                             </div>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>Insurance number</label>
+                                <label className='profile-card__label'>Insurance number</label>
                                 <p className='profile-card__value'>{data.insurance}</p>
                             </div>
                             <hr />
                             <h4>Address</h4>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>Address line 1</label>
+                                <label className='profile-card__label'>Address line 1</label>
                                 <p className='profile-card__value'>{data.address.line1}</p>
                             </div>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>Address line 2</label>
+                                <label className='profile-card__label'>Address line 2</label>
                                 <p className='profile-card__value'>{data.address.line2}</p>
                             </div>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>City</label>
+                                <label className='profile-card__label'>City</label>
                                 <p className='profile-card__value'>{data.address.city}</p>
                             </div>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>State/Province</label>
+                                <label className='profile-card__label'>State/Province</label>
                                 <p className='profile-card__value'>{data.address.state}</p>
                             </div>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>Postal code</label>
+                                <label className='profile-card__label'>Postal code</label>
                                 <p className='profile-card__value'>{data.address.postal}</p>
                             </div>
                             <div className='profile-card__field'>
-                                <label htmlFor="" className='profile-card__label'>Country</label>
+                                <label className='profile-card__label'>Country</label>
                                 <p className='profile-card__value'>{data.address.country}</p>
                             </div>
                         </div>
@@ -115,7 +159,7 @@ export default function Account(){
                 )}
                 {editing &&(
                     <>
-                    <form className="profile-form profile-card__info" onSubmit={onSave}>
+                    <form className="profile-form" onSubmit={onSave}>
                         <div className='profile-card__info'>
                             <div className='profile-card__field'>
                                 <label className="profile-card__label" htmlFor="firstName">First name</label>
@@ -170,34 +214,10 @@ export default function Account(){
                             <div className='profile-card__field'>
                                 <label className="profile-card__label" htmlFor="country">Country</label>
                                 <div className='search__select-wrap'>
-                                    <select className='form__select' id="country" name="country" defaultValue={form.address.country} onChange={onChange("address.country")} required>
-                                        <option value="Austria">Austria</option>
-                                        <option value="Belgium">Belgium</option>
-                                        <option value="Bulgaria">Bulgaria</option>
-                                        <option value="Croatia">Croatia</option>
-                                        <option value="Cyprus">Cyprus</option>
-                                        <option value="Czech Republic">Czech Republic</option>
-                                        <option value="Denmark">Denmark</option>
-                                        <option value="Estonia">Estonia</option>
-                                        <option value="Finland">Finland</option>
-                                        <option value="France">France</option>
-                                        <option value="Germany">Germany</option>
-                                        <option value="Greece">Greece</option>
-                                        <option value="Hungary">Hungary</option>
-                                        <option value="Ireland">Ireland</option>
-                                        <option value="Italy">Italy</option>
-                                        <option value="Latvia">Latvia</option>
-                                        <option value="Lithuania">Lithuania</option>
-                                        <option value="Luxembourg">Luxembourg</option>
-                                        <option value="Malta">Malta</option>
-                                        <option value="Netherlands">Netherlands</option>
-                                        <option value="Poland">Poland</option>
-                                        <option value="Portugal">Portugal</option>
-                                        <option value="Romania">Romania</option>
-                                        <option value="Slovakia">Slovakia</option>
-                                        <option value="Slovenia">Slovenia</option>
-                                        <option value="Spain">Spain</option>
-                                        <option value="Sweden">Sweden</option>
+                                    <select className='form__select' id="country" name="country" value={form.address.country} onChange={onChange("address.country")} required>
+                                        {EU_COUNTRIES.map(country => (
+                                            <option key={country} value={country}>{country}</option>
+                                        ))}
                                     </select>
                                     <img className='down__icon' src={downIcon} alt="" />
                                 </div>
@@ -205,8 +225,8 @@ export default function Account(){
                         </div>
 
                         <div className='profile__actions'>
-                            <button className='btn btn--cancel' type="submit" onClick={onCancel}>Cancel</button>
-                            <button className='btn btn--primary' type="submit">Save changes</button>
+                            <button className='btn btn--cancel' type="button" onClick={onCancel} disabled={saving}>Cancel</button>
+                            <button className='btn btn--primary' type="submit" disabled={saving}>{saving ? 'Saving...' : 'Save changes'}</button>
                         </div>
                     </form>
                     </>

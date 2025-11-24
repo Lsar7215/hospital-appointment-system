@@ -1,4 +1,191 @@
-/*search common Hero & SearchPreview*/
+
+/*login*/
+
+.login{
+    height: 80dvh;
+    background: var(--bg-page);
+}
+
+.login__section{
+    height: 100%;
+    display: grid;
+    place-items: center;
+    padding-block: 2.4rem;
+}
+
+
+/*Signup*/
+.auth{
+    background: var(--bg-page);
+}
+
+
+@media (min-width: 1024px) {
+    .form__group-inner, .form--auth__inner{
+    grid-template-columns: 1fr 1fr;
+}
+
+.form__submit{
+    display: block;
+    margin: auto;
+    width: 20rem !important;
+}
+}
+.auth__section{
+    padding-top: var(--px-lg);
+    padding-bottom: var(--px-lg);
+}
+.auth__inner{
+    max-width: 58rem;
+    width: 100%;
+}
+.auth__header{
+    display: flex;
+    flex-direction: row;
+    gap: var(--px-base);
+    text-align: start;
+    padding: var(--px-lg) 0;
+}
+
+.auth__icon{
+    max-width: 5.5rem;
+    height: 5.5rem;
+    object-fit: cover;
+}
+
+.auth__title{
+    font-weight: bold;
+}
+
+.auth__lead{
+    color: var(--sub);
+}
+
+.form__field{
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-size: var(--px-xs);
+}
+
+.form__label{
+    font-weight: bold;
+}
+
+.form__input, .form__select{
+    width: 100%;
+    border: var(--border-card);
+    padding: 1.2rem var(--px-xs);
+    border-radius: var(--radius-sm);
+}
+.auth .down__icon{
+    right: 0.6rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.form__legend{
+    font-size: var(--px-base);
+    font-weight: bold;
+}
+.form__group{
+    background: var(--bg-page);
+    border: var(--border-card);
+    border-radius: var(--radius-box);
+    padding: var(--px-sm);
+}
+
+.form__checks{
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    font-size: var(--px-xs);
+}
+.form__submit{
+    width: 100%;
+    font-size: var(--px-base);
+}
+
+.auth__alt{
+    text-align: center;
+    margin: var(--px-base);
+}
+
+.form__checks a, .auth__alt a{
+    color: var(--primary);
+}
+
+/*Doctors*/
+.doctors{
+     background: var(--bg-page);
+}
+
+
+.doctors__meta{
+    margin-top: var(--px-lg);
+    display: flex;
+    flex-direction: row;
+    margin-bottom: var(--px-lg);
+    align-items: center;
+    gap: var(--px-base);
+}
+
+.doctors__sort{
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    font-size: var(--px-xs);
+    color: var(--sub);
+}
+
+.is-active{
+    color: var(--primary);
+    font-weight: 700;
+}
+
+
+.doctors__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 700px) {
+.doctors__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+.doctors__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.doctors__pagination{
+    width: fit-content;
+    margin: auto;
+}
+
+/*Doctor*/
+.doctor{
+    background: var(--bg-page);
+}
+
+.doctor__header{
+    text-align: center;
+    margin-top: 4.8rem;
+}
+
+.doctor__title{
+    font-size: 2rem;
+    margin-bottom: var(--px-base);
+}
+
+
+
+/*search common Hero*/
 .search{
     display: flex;
     flex-direction: column;
@@ -165,20 +352,6 @@
 }
 }
 
-.features__header{
-    margin-bottom: 4.8rem;
-    text-align: center;
-}
-
-.features__header__title{
-    margin-bottom: var(--px-base);
-    color: var(--ink);
-}
-
-.features__header__text{
-    color: var(--sub);
-}
-
 .features__grid{
     display: grid;
     gap: var(--px-sm);
@@ -234,7 +407,6 @@
 }
 
 /*DoctorCard*/
-
 .doctor-card{
     display: flex;
     flex-direction: column;
@@ -247,39 +419,26 @@
 }
 
 
-
 .doctor-card__top{
     display: flex;
     flex-direction: row;
     gap: var(--px-base);
 }
 
-.doctor-card__profile{
-    object-fit: cover;
-    border-radius: var(--radius-box);
-    width: 8rem;
-    height: 8rem;
-}
 
 .doctor-card__info{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
 }
 
 .doctor-card__name{
-    margin-bottom: 0.4rem;
     color: var(--ink);
 }
 
 .doctor-card__specialty{
-    font-size: 1.2rem;
-    margin: 0.8rem 0;
-    padding: 0.2rem 0.8rem;
-    width: fit-content;
     color: var(--primary);
-    border-radius: var(--radius-box);
     background-color:  var(--secondary);
 }
 
@@ -289,69 +448,54 @@
     margin-top: var(--px-base);
     width: 100%;
 }
-/*SearchPreview*/
-.search-preview{
-    padding: 6.4rem 0;
-    background-color: var(--bg2);
-}
-@media (min-width: 768px) {
-.search-preview{
-    padding: 9.6rem 0;  
-}
-}
 
 
-.search-preview__header{
-    margin-bottom: 4.8rem;
-    text-align: center;
+/*DoctorProfileCard*/
+
+.doctor-profile__card{
+    display: flex;
+    flex-direction: column;
+    gap: var(--px-base);
 }
 
-.search-preview__title{
-    margin-bottom: var(--px-base);
+.doctor-profile__top{
+    display: flex;
+    flex-direction: row;
+    gap: var(--px-base);
+}
+
+.doctor-profile__profile{
+    object-fit: cover;
+    border-radius: var(--radius-box);
+    width: 8rem;
+    height: 8rem;
+}
+
+.doctor-profile__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.doctor-profile__name{
+    margin-bottom: 0.4rem;
     color: var(--ink);
 }
 
-.search-preview__lead{
-    color: var(--sub);
+.badge__specialty{
+    color: var(--primary);
+    background-color:  var(--secondary);
 }
 
-.search-preview__controls{
-    padding: var(--px-sm);
-    margin-bottom: var(--px-lg);
-    border-radius: var(--radius-box);
-    background-color: var(--bg);
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+
+.doctor-profile__button{
+    padding: 0.8rem var(--px-base);
+    margin-top: var(--px-base);
+    width: 100%;
 }
 
-.search__fields{
-    display: grid;
-}
 
-@media (min-width: 640px) {
-.search__fields{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-} 
-@media (min-width: 1024px) {
-.search__fields{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-} 
-
-.search-preview__grid{
-    display: grid;
-    gap: var(--px-sm);
-}
-@media (min-width: 768px) {
-.search-preview__grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-}
-@media (min-width: 1024px) {
-.search-preview__grid{
-    grid-template-columns: repeat(3, minmax(0, 1fr));   
-}
-}
 
 /*DoctorProfile*/
 .doctor-profile{
@@ -411,7 +555,6 @@
     padding: var(--px-base);
     border-radius: var(--radius-box);
     background-color: var(--bg2);
-    margin-top: var(--px-base);
 }
 .doctor-card__about-title{
     margin-bottom: 0.8rem;
@@ -455,8 +598,9 @@
 } 
 
 .availability__slot--available{
-    border: transparent 0.2rem solid;
+    border:0.1rem solid var(--primary);
     color: var(--primary);
+    background-color: #eff6ff3f;
 }
 
 .availability__slot--available:hover{
@@ -470,11 +614,18 @@
     cursor: not-allowed;
     background-color: var(--bg2);
     color: #94A3B8;
+    border:0.1rem solid var(--sub);
+}
+.availability__slot--unavailable:hover{
+    opacity: 1;
 }
 
+.availability__slot--selected{
+    background-color: rgba(0, 128, 0, 0.635);
+}
 .availability__legend{
     display: flex;
-    margin-top: var(--px-base);
+    margin: var(--px-base) 0;
     gap: var(--px-base);
     justify-content: center;
     align-items: center;
@@ -534,12 +685,6 @@
 }
 }
 
-
-
-.how-it-works__header{
-    margin-bottom: 4.8rem;
-    text-align: center;
-}
 
 .how-it-works__title{
     margin-bottom: var(--px-base);
