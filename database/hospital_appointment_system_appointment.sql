@@ -29,7 +29,7 @@ CREATE TABLE appointment (
   appointment_date date NOT NULL,
   appointment_time time NOT NULL,
   room varchar(45) NOT NULL,
-  `status` varchar(45) NOT NULL COMMENT 'upcomming / completed / canceled',
+  `status` varchar(45) NOT NULL COMMENT 'upcoming / completed / canceled',
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (appointment_id),
   KEY fk_doctor_idx (d_id),
