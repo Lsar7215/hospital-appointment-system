@@ -19,15 +19,20 @@
 -- Table structure for table `doctor`
 --
 
-DROP TABLE IF EXISTS `doctor`;
+DROP TABLE IF EXISTS doctor;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `doctor` (
-  `doctor_id` int NOT NULL,
-  `first_name` varchar(45) NOT NULL,
-  `last_name` varchar(45) NOT NULL,
-  `specialization` varchar(45) NOT NULL DEFAULT 'Cardiologist',
-  PRIMARY KEY (`doctor_id`)
+CREATE TABLE doctor (
+  doctor_id int NOT NULL,
+  email varchar(254) NOT NULL,
+  first_name varchar(45) NOT NULL,
+  last_name varchar(45) NOT NULL,
+  specialization varchar(45) NOT NULL DEFAULT 'Cardiologist',
+  room varchar(45) DEFAULT NULL,
+  about varchar(500) DEFAULT NULL,
+  PRIMARY KEY (doctor_id),
+  KEY fk_doctor_email_idx (email),
+  CONSTRAINT fk_doctor_email FOREIGN KEY (email) REFERENCES `user` (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -35,10 +40,10 @@ CREATE TABLE `doctor` (
 -- Dumping data for table `doctor`
 --
 
-LOCK TABLES `doctor` WRITE;
-/*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (1,'Takeshi','Tanaka','Cardiologist'),(2,'Tatsuya','Suzuki','Dematologist'),(3,'Sakura','Sato','Orthopedic'),(4,'Natsuko','Sakakura','Neurologist'),(5,'Taro','Suzuki','Pediatrician'),(6,'Hanako','Suzuki','Ophthalmologist'),(7,'Katsu','Don','Dentist'),(8,'Oyako','Don','Nephrologist'),(9,'Usagi','Sasaki','Sugeron'),(10,'Risu','Tanaka','Oncologist'),(11,'Ushiko','Sakada','Psychiatrist'),(12,'Tomoko','Nakanishi','Hepatologist'),(13,'Kiko','Mirano','Gynaecologist'),(14,'Mai','Matsuyama','Gastroenterologist'),(15,'Manako','Nakagawa','Otolaryngologist'),(16,'Fujiko','Fujiwara','Pulmonologist'),(17,'Goemon','Tanaka','Veterinarian');
-/*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
+LOCK TABLES doctor WRITE;
+/*!40000 ALTER TABLE doctor DISABLE KEYS */;
+INSERT INTO doctor VALUES (1,'doctor@doctor.com','Takeshi','Tanaka','Cardiologist',NULL,NULL);
+/*!40000 ALTER TABLE doctor ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-21 20:09:27
+-- Dump completed on 2025-11-19 20:03:02

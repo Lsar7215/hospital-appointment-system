@@ -11,6 +11,8 @@ import Account from "../pages/patient/Account"
 import Appointments from "../pages/doctor/Appointments";
 import Schedule from "../pages/doctor/Schedule"
 
+const basename = "/doctor-appointment-system";
+
 export const router = createBrowserRouter([
     {
         element:<AppShell/>,
@@ -32,4 +34,19 @@ export const router = createBrowserRouter([
             {path:"/doctorpage/schedule", element:<Schedule/>},
         ]
     }
-])
+], { basename: basename })
+
+function NotFound() {
+  return (
+    <div style={{ padding: '2rem', textAlign: 'center', fontFamily: 'Inter, sans-serif' }}>
+      <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
+      <p className="text-lg mb-6">The page you are looking for does not exist.</p>
+      <a 
+        href="/doctor-appointment-system/" 
+        className="text-blue-600 hover:text-blue-800 underline"
+      >
+        Go back to Home
+      </a>
+    </div>
+  );
+}
