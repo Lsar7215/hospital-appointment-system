@@ -1,7 +1,7 @@
 # 🏥 Hospital Appointment Booking System
 
 ## 📌 Project Overview
-The Hospital Appointment Booking System is a web-based application that allows **patients** to book appointments with doctors, **doctors** to manage their schedules and patient records, and **administrators** to oversee the hospital’s appointment process.  
+The Hospital Appointment Booking System is a web-based application that allows **patients** to book appointments with doctors, **doctors** to manage their schedules and patient records, and **administrators** to oversee the hospital’s appointment process.
 
 The goal is to create a secure, scalable, and user-friendly platform that improves hospital efficiency and patient experience.  
 
@@ -47,20 +47,17 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
   - Search doctors by specialization/availability  
   - View doctor profiles  
   - Book/Cancel appointments  
-  - View appointment history  
 - **Doctor Dashboard**  
   - Manage availability  
   - View appointments  
-  - Mark completed/missed appointments (Not yet developed)
-  - Add consultation notes (Not yet developed)
 - **Admin Dashboard**  
   - Manage doctors (add/edit/remove)  
   - View appointment summaries  
-  - Generate reports (Not yet developed)
 
 ### Backend
 - **User Management**  
-  - Authentication & role-based access  
+  - Authentication
+  - Role-based access  
   - Profile management  
 - **Doctor Management**  
   - CRUD operations for doctor profiles  
@@ -68,9 +65,6 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
 - **Appointment Management**  
   - Booking, rescheduling, cancellation  
   - Prevent double-booking  
-- **Reports & Analytics**  
-  - Doctor workload reports  
-  - Appointment history  
 - **System Infrastructure**  
   - Database  
   - Security (encryption, password hashing)  
@@ -85,15 +79,17 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
 - **State Management:**  API  
 
 ### Backend
-- **Framework:** PHP
-- **Authentication:** JWT (JSON Web Tokens)  
+- PHP
+
+## Mailing System
+- **SMTP Client:** PHP Mailer
+- **Email Service Provider:** SendGrid
 
 ### Database
 - MySQL
 
 ### Deployment & Tools
 - **Version Control:** GitHub
-- **Hosting:** Vercel / Heroku
 
 ---
 
@@ -106,6 +102,7 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
 - **Backend**  
   - Develop APIs  
   - Manage authentication & database schema  
+  - Mailing System
 
 - **Full Stack / QA**  
   - Testing & integration  
@@ -115,6 +112,6 @@ The goal is to create a secure, scalable, and user-friendly platform that improv
 ---
 
 ## ✅ Deliverables
-1. Functional web application (frontend + backend + database).  
+1. Functional web application (frontend + backend + database + mailing).  
 2. Documentation (requirements, design, testing, deployment).  
 3. Task management for team collaboration.  
