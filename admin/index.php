@@ -40,7 +40,7 @@
     }
     
 
-    //import database
+    
     include("../connection.php");
 
     
@@ -133,9 +133,9 @@
                                 </p>
                                 <p class="heading-sub12" style="padding: 0;margin: 0;">
                                     <?php 
-                                date_default_timezone_set('Asia/Kolkata');
+                                date_default_timezone_set('Europe/Zurich');
         
-                                $today = date('Y-m-d');
+                                $today = date('d-m-Y');
                                 echo $today;
 
 
@@ -289,7 +289,7 @@
                                         <tbody>
                                         
                                             <?php
-                                            $nextweek=date("Y-m-d",strtotime("+1 week"));
+                                            $nextweek=date("d-m-Y",strtotime("+1 week"));
                                             $sqlmain= "select appointment.appoid,schedule.scheduleid,schedule.title,doctor.docname,patient.pname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join patient on patient.pid=appointment.pid inner join doctor on schedule.docid=doctor.docid  where schedule.scheduledate>='$today'  and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc";
 
                                                 $result= $database->query($sqlmain);
@@ -385,7 +385,7 @@
                                         <tbody>
                                         
                                             <?php
-                                            $nextweek=date("Y-m-d",strtotime("+1 week"));
+                                            $nextweek=date("d-m-Y",strtotime("+1 week"));
                                             $sqlmain= "select schedule.scheduleid,schedule.title,doctor.docname,schedule.scheduledate,schedule.scheduletime,schedule.nop from schedule inner join doctor on schedule.docid=doctor.docid  where schedule.scheduledate>='$today' and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc"; 
                                                 $result= $database->query($sqlmain);
                 

@@ -61,7 +61,7 @@
                                  <img src="../img/user.png" alt="" width="100%" style="border-radius:50%">
                              </td>
                              <td style="padding:0px;margin:0px;">
-                                 <p class="profile-title"><?php echo substr($username,0,13)  ?>..</p>
+                                 <p class="profile-title"><?php echo substr($username,0,15)  ?></p>
                                  <p class="profile-subtitle"><?php echo substr($useremail,0,22)  ?></p>
                              </td>
                          </tr>
@@ -112,7 +112,7 @@
                     <td >
                             <form action="schedule.php" method="post" class="header-search">
 
-                                        <input type="search" name="search" class="input-text header-searchbar" placeholder="Search Doctor name or Email or Date (YYYY-MM-DD)" list="doctors" >&nbsp;&nbsp;
+                                        <input type="search" name="search" class="input-text header-searchbar" placeholder="Search Doctor name or Email or Date (DD-MM-YYYY)" list="doctors" >&nbsp;&nbsp;
                                         
                                         <?php
                                             echo '<datalist id="doctors">';
@@ -187,17 +187,18 @@
                                     $docname=$row["docname"];
                                     $docemail=$row["docemail"];
                                     $scheduledate=$row["scheduledate"];
+                                    $dateObject = DateTime::createFromFormat('Y-m-d', $scheduledate);
+                                    $scheduletime=$row["scheduletime"];
                                     $scheduletime=$row["scheduletime"];
                                     $sql2="select * from appointment where scheduleid=$id";
-                                    //echo $sql2;
-                                     $result12= $database->query($sql2);
-                                     $apponum=($result12->num_rows)+1;
+                                    $result12= $database->query($sql2);
+                                    $apponum=($result12->num_rows)+1;
                                     
                                     echo '
                                         <form action="booking-complete.php" method="post">
                                             <input type="hidden" name="scheduleid" value="'.$scheduleid.'" >
                                             <input type="hidden" name="apponum" value="'.$apponum.'" >
-                                            <input type="hidden" name="date" value="'.date('Y-m-d').'" >
+                                            <input type="hidden" name="date" value="'.date('d-m-Y').'" >
 
                                     ';
                                      
@@ -219,19 +220,13 @@
                                                         </div><br>
                                                         <div class="h3-search" style="font-size:18px;">
                                                             Session Title: '.$title.'<br>
-                                                            Session Scheduled Date: '.$scheduledate.'<br>
+                                                            Session Scheduled Date: '.$dateObject->format('d-m-Y').'<br>
                                                             Session Starts : '.$scheduletime.'<br>
-                                                            Channeling fee : <b>LKR.2 000.00</b>
-
                                                         </div>
                                                         <br>
-                                                        
                                                 </div>
-                                                        
                                             </div>
                                         </td>
-                                        
-                                        
                                         
                                         <td style="width: 25%;">
                                             <div  class="dashboard-items search-items"  >

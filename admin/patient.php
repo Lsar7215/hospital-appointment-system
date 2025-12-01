@@ -36,7 +36,7 @@
     
     
 
-    //import database
+    
     include("../connection.php");
 
     
@@ -133,9 +133,9 @@
                         </p>
                         <p class="heading-sub12" style="padding: 0;margin: 0;">
                             <?php 
-                        date_default_timezone_set('Asia/Kolkata');
+                        date_default_timezone_set('Europe/Zurich');
 
-                        $date = date('Y-m-d');
+                        $date = date('d-m-Y');
                         echo $date;
                         ?>
                         </p>

@@ -35,7 +35,7 @@
     }
     
 
-    //import database
+    
     include("../connection.php");
     $sqlmain= "select * from doctor where docemail=?";
     $stmt = $database->prepare($sqlmain);
@@ -151,7 +151,7 @@
                             <?php
                                 echo '<datalist id="patient">';
                                 $list11 = $database->query($sqlmain);
-                               //$list12= $database->query("select * from appointment inner join patient on patient.pid=appointment.pid inner join schedule on schedule.scheduleid=appointment.scheduleid where schedule.docid=1;");
+
 
                                 for ($y=0;$y<$list11->num_rows;$y++){
                                     $row00=$list11->fetch_assoc();

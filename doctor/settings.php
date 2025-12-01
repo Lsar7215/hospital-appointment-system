@@ -28,7 +28,6 @@
 <body>
     <?php
 
-    //learn from w3schools.com
 
     session_start();
 
@@ -43,17 +42,12 @@
         header("location: ../login.php");
     }
     
-
-    //import database
     include("../connection.php");
     $userrow = $database->query("select * from doctor where docemail='$useremail'");
     $userfetch=$userrow->fetch_assoc();
     $userid= $userfetch["docid"];
     $username=$userfetch["docname"];
 
-
-    //echo $userid;
-    //echo $username;
     
     ?>
     <div class="container">
@@ -127,9 +121,9 @@
                                 </p>
                                 <p class="heading-sub12" style="padding: 0;margin: 0;">
                                     <?php 
-                                date_default_timezone_set('Asia/Kolkata');
+                                date_default_timezone_set('Europe/Zurich');
         
-                                $today = date('Y-m-d');
+                                $today = date('d-m-Y');
                                 echo $today;
 
 
@@ -237,6 +231,7 @@
             </table>
         </div>
     </div>
+    
     <?php 
     if($_GET){
         

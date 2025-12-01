@@ -151,9 +151,9 @@
                         <td >
                             <h3>Welcome!</h3>
                             <h1><?php echo $username  ?>.</h1>
-                            <p>// Some ref text to show how this works.
-                                <a href="doctors.php" class="non-style-link"><b>"All Doctors"</b></a> section or 
-                                <a href="schedule.php" class="non-style-link"><b>"Sessions"</b> </a><br>
+                            <p> You can search in
+                                <a href="doctors.php" class="non-style-link"><b>"All Doctors"</b></a> section or find available sessions in the
+                                <a href="schedule.php" class="non-style-link"><b>"Sessions"</b> </a> page.
                                 <br>
                             </p>
                             

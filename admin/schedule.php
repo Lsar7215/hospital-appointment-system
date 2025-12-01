@@ -21,8 +21,6 @@
 <body>
     <?php
 
-    //learn from w3schools.com
-
     session_start();
 
     if(isset($_SESSION["user"])){
@@ -36,7 +34,7 @@
     
     
 
-    //import database
+    
     include("../connection.php");
 
     
@@ -110,9 +108,9 @@
                         <p class="heading-sub12" style="padding: 0;margin: 0;">
                             <?php 
 
-                        date_default_timezone_set('Asia/Kolkata');
+                        date_default_timezone_set('Europe/Zurich');
 
-                        $today = date('Y-m-d');
+                        $today = date('d-m-Y');
                         echo $today;
 
                         $list110 = $database->query("select  * from  schedule;");
@@ -244,41 +242,28 @@
                         <div class="abc scroll">
                         <table width="93%" class="sub-table scrolldown" border="0">
                         <thead>
-                        <tr>
+                            <tr>
                                 <th class="table-headin">
-                                    
-                                
-                                Session Title
-                                
+                                    Session Title    
                                 </th>
-                                
                                 <th class="table-headin">
                                     Doctor
                                 </th>
                                 <th class="table-headin">
-                                    
                                     Sheduled Date & Time
-                                    
                                 </th>
                                 <th class="table-headin">
-                                    
-                                Max num that can be booked
-                                    
+                                    Max num that can be booked
                                 </th>
-                                
                                 <th class="table-headin">
-                                    
                                     Events
-                                    
-                                </tr>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
                         
                             <?php
-
-                                
                                 $result= $database->query($sqlmain);
-
                                 if($result->num_rows==0){
                                     echo '<tr>
                                     <td colspan="4">
@@ -303,6 +288,7 @@
                                     $title=$row["title"];
                                     $docname=$row["docname"];
                                     $scheduledate=$row["scheduledate"];
+                                    $dateObject = DateTime::createFromFormat('Y-m-d', $scheduledate);
                                     $scheduletime=$row["scheduletime"];
                                     $nop=$row["nop"];
                                     echo '<tr>
@@ -313,7 +299,7 @@
                                         '.substr($docname,0,20).'
                                         </td>
                                         <td style="text-align:center;">
-                                            '.substr($scheduledate,0,10).' '.substr($scheduletime,0,5).'
+                                            '.$dateObject->format('d-m-Y').' '.substr($scheduletime,0,5).'
                                         </td>
                                         <td style="text-align:center;">
                                             '.$nop.'

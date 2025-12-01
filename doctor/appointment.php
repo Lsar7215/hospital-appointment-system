@@ -21,8 +21,6 @@
 <body>
     <?php
 
-    //learn from w3schools.com
-
     session_start();
 
     if(isset($_SESSION["user"])){
@@ -38,13 +36,13 @@
     
     
 
-       //import database
+
        include("../connection.php");
        $userrow = $database->query("select * from doctor where docemail='$useremail'");
        $userfetch=$userrow->fetch_assoc();
        $userid= $userfetch["docid"];
        $username=$userfetch["docname"];
-    //echo $userid;
+
     ?>
     <div class="container">
         <div class="menu">
@@ -115,9 +113,9 @@
                         <p class="heading-sub12" style="padding: 0;margin: 0;">
                             <?php 
 
-                        date_default_timezone_set('Asia/Kolkata');
+                        date_default_timezone_set('Europe/Zurich');
 
-                        $today = date('Y-m-d');
+                        $today = date('d-m-Y');
                         echo $today;
 
                         $list110 = $database->query("select * from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join patient on patient.pid=appointment.pid inner join doctor on schedule.docid=doctor.docid  where  doctor.docid=$userid ");
@@ -132,15 +130,6 @@
 
                 </tr>
                
-                <!-- <tr>
-                    <td colspan="4" >
-                        <div style="display: flex;margin-top: 40px;">
-                        <div class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49);margin-top: 5px;">Schedule a Session</div>
-                        <a href="?action=add-session&id=none&error=0" class="non-style-link"><button  class="login-btn btn-primary btn button-icon"  style="margin-left:25px;background-image: url('../img/icons/add.svg');">Add a Session</font></button>
-                        </a>
-                        </div>
-                    </td>
-                </tr> -->
                 <tr>
                     <td colspan="4" style="padding-top:10px;width: 100%;" >
                     
@@ -185,19 +174,12 @@
                     $sqlmain= "select appointment.appoid,schedule.scheduleid,schedule.title,doctor.docname,patient.pname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join patient on patient.pid=appointment.pid inner join doctor on schedule.docid=doctor.docid  where  doctor.docid=$userid ";
 
                     if($_POST){
-                        //print_r($_POST);
-                        
-
-
-                        
                         if(!empty($_POST["sheduledate"])){
                             $sheduledate=$_POST["sheduledate"];
                             $sqlmain.=" and schedule.scheduledate='$sheduledate' ";
                         };
 
-                        
-
-                        //echo $sqlmain;
+                    
 
                     }
 
@@ -413,7 +395,7 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <input type="date" name="date" class="input-text" min="'.date('Y-m-d').'" required><br>
+                                    <input type="date" name="date" class="input-text" min="'.date('d-m-Y').'" required><br>
                                 </td>
                             </tr>
                             <tr>

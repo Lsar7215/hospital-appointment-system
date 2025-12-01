@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../css/animations.css">  
     <link rel="stylesheet" href="../css/main.css">  
     <link rel="stylesheet" href="../css/admin.css">
-        
     <title>Doctor</title>
     <style>
         .popup{
@@ -24,19 +23,15 @@
             header("location: ../login.php");
         }
 
-    }else{
+    } else {
         header("location: ../login.php");
     }
     
-    
-
-    //import database
     include("../connection.php");
 
 
 
     if($_POST){
-        //print_r($_POST);
         $result= $database->query("select * from webuser");
         $name=$_POST['name'];
         $spec=$_POST['spec'];
@@ -48,38 +43,25 @@
         if ($password==$cpassword){
             $error='3';
             $result= $database->query("select * from webuser where email='$email';");
-            if($result->num_rows==1){
+            if ($result->num_rows==1){
                 $error='1';
-            }else{
+            } else {
 
                 $sql1="insert into doctor(docemail,docname,docpassword,doctel,specialties) values('$email','$name','$password','$tele',$spec);";
                 $sql2="insert into webuser values('$email','d')";
                 $database->query($sql1);
                 $database->query($sql2);
-
-                //echo $sql1;
-                //echo $sql2;
                 $error= '4';
-                
             }
-            
-        }else{
+        } else {
             $error='2';
         }
     
-    
-        
-        
     }else{
-        //header('location: signup.php');
         $error='3';
     }
-    
 
     header("location: doctors.php?action=add&error=".$error);
     ?>
-    
-   
-
 </body>
 </html>

@@ -3,7 +3,7 @@
     session_start();
 
     if(isset($_SESSION["user"])){
-        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='a'){
+        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='a' or $_SESSION['usertype']=='d'){
             header("location: ../login.php");
         }
 
@@ -13,7 +13,6 @@
     
     
     if($_POST){
-        
         include("../connection.php");
         $title=$_POST["title"];
         $docid=$_POST["docid"];

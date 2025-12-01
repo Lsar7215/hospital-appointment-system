@@ -1,11 +1,5 @@
 <?php
 
-// =========================================================================
-// TRADITIONAL PHP LOGIN SCRIPT
-// This script reads from $_POST and uses header() to redirect.
-// It does NOT return JSON.
-// =========================================================================
-
 session_start();
 $_SESSION["user"]="";
 $_SESSION["usertype"]="";
@@ -15,17 +9,13 @@ $_SESSION["date"] = date('d-m-Y');
 
 include("connection.php"); 
 
-// We now check $_POST, just like your original file.
 if ($_POST) {
 
-    // The 'name' attributes from Login.jsx are 'email' and 'password'
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
     if (empty($email) || empty($password)) {
-        // Redirect back to login with an error
-        // You can add error handling here, e.g., header('Location: http://localhost:5173/login?error=empty');
-        // For now, we just fail silently or send to a generic error page.
+        
         echo "Email or password was empty.";
         exit();
     }

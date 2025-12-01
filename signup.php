@@ -6,9 +6,9 @@ include("connection.php");
 date_default_timezone_set('Europe/Zurich');
 $date = date('d-m-Y');
 
-// Base URL for React app (where it's running)
+// Base URL for React app (where it's running) [Should not use this 🙏😭]
 $react_app_url = "http://localhost:5173"; 
-// Base URL for PHP app (for successful redirects) [Hopefully]
+// Base URL for PHP app (for successful redirects) [Hopefully 🙏😭]
 $php_app_url = "http://localhost/doctor-appointment-system";
 
 // Function to redirect back to React with an error

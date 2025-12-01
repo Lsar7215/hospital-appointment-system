@@ -21,7 +21,6 @@
 <body>
     <?php
 
-    //learn from w3schools.com
 
     session_start();
 
@@ -34,9 +33,6 @@
         header("location: ../login.php");
     }
     
-    
-
-    //import database
     include("../connection.php");
 
     
@@ -110,9 +106,9 @@
                         <p class="heading-sub12" style="padding: 0;margin: 0;">
                             <?php 
 
-                        date_default_timezone_set('Asia/Kolkata');
+                        date_default_timezone_set('Europe/Zurich');
 
-                        $today = date('Y-m-d');
+                        $today = date('d-m-Y');
                         echo $today;
 
                         $list110 = $database->query("select  * from  appointment;");
@@ -126,16 +122,6 @@
 
 
                 </tr>
-               
-                <!-- <tr>
-                    <td colspan="4" >
-                        <div style="display: flex;margin-top: 40px;">
-                        <div class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49);margin-top: 5px;">Schedule a Session</div>
-                        <a href="?action=add-session&id=none&error=0" class="non-style-link"><button  class="login-btn btn-primary btn button-icon"  style="margin-left:25px;background-image: url('../img/icons/add.svg');">Add a Session</font></button>
-                        </a>
-                        </div>
-                    </td>
-                </tr> -->
                 <tr>
                     <td colspan="4" style="padding-top:10px;width: 100%;" >
                     
@@ -198,7 +184,6 @@
                 
                 <?php
                     if($_POST){
-                        //print_r($_POST);
                         $sqlpt1="";
                         if(!empty($_POST["sheduledate"])){
                             $sheduledate=$_POST["sheduledate"];
@@ -211,8 +196,7 @@
                             $docid=$_POST["docid"];
                             $sqlpt2=" doctor.docid=$docid ";
                         }
-                        //echo $sqlpt2;
-                        //echo $sqlpt1;
+                    
                         $sqlmain= "select appointment.appoid,schedule.scheduleid,schedule.title,doctor.docname,patient.pname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join patient on patient.pid=appointment.pid inner join doctor on schedule.docid=doctor.docid";
                         $sqllist=array($sqlpt1,$sqlpt2);
                         $sqlkeywords=array(" where "," and ");
@@ -224,11 +208,6 @@
                                 $key2++;
                             };
                         };
-                        //echo $sqlmain;
-
-                        
-                        
-                        //
                     }else{
                         $sqlmain= "select appointment.appoid,schedule.scheduleid,schedule.title,doctor.docname,patient.pname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join patient on patient.pid=appointment.pid inner join doctor on schedule.docid=doctor.docid  order by schedule.scheduledate desc";
 
@@ -454,7 +433,7 @@
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <input type="date" name="date" class="input-text" min="'.date('Y-m-d').'" required><br>
+                                    <input type="date" name="date" class="input-text" min="'.date('d-m-Y').'" required><br>
                                 </td>
                             </tr>
                             <tr>

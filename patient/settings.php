@@ -27,9 +27,6 @@
 </head>
 <body>
     <?php
-
-    //learn from w3schools.com
-
     session_start();
 
     if(isset($_SESSION["user"])){
@@ -44,7 +41,6 @@
     }
     
 
-    //import database
     include("../connection.php");
     $sqlmain= "select * from patient where pemail=?";
     $stmt = $database->prepare($sqlmain);
@@ -67,7 +63,7 @@
                                     <img src="../img/user.png" alt="" width="100%" style="border-radius:50%">
                                 </td>
                                 <td style="padding:0px;margin:0px;">
-                                    <p class="profile-title"><?php echo substr($username,0,13)  ?>..</p>
+                                    <p class="profile-title"><?php echo substr($username,0,15)  ?></p>
                                     <p class="profile-subtitle"><?php echo substr($useremail,0,22)  ?></p>
                                 </td>
                             </tr>

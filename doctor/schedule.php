@@ -21,8 +21,6 @@
 <body>
     <?php
 
-    //learn from w3schools.com
-
     session_start();
 
     if(isset($_SESSION["user"])){
@@ -38,13 +36,11 @@
     
     
 
-    //import database
     include("../connection.php");
     $userrow = $database->query("select * from doctor where docemail='$useremail'");
     $userfetch=$userrow->fetch_assoc();
     $userid= $userfetch["docid"];
     $username=$userfetch["docname"];
- //echo $userid;
  ?>
  <div class="container">
      <div class="menu">
@@ -104,10 +100,6 @@
                     <td width="13%" >
                     <a href="schedule.php" ><button  class="login-btn btn-primary-soft btn btn-icon-back"  style="padding-top:11px;padding-bottom:11px;margin-left:20px;width:125px"><font class="tn-in-text">Back</font></button></a>
                     </td>
-                    <td>
-                        <p style="font-size: 23px;padding-left:12px;font-weight: 600;">My Sessions</p>
-                                           
-                    </td>
                     <td width="15%">
                         <p style="font-size: 14px;color: rgb(119, 119, 119);padding: 0;margin: 0;text-align: right;">
                             Today's Date
@@ -115,9 +107,9 @@
                         <p class="heading-sub12" style="padding: 0;margin: 0;">
                             <?php 
 
-                        date_default_timezone_set('Asia/Kolkata');
+                        date_default_timezone_set('Europe/Zurich');
 
-                        $today = date('Y-m-d');
+                        $today = date('d-m-Y');
                         echo $today;
 
                         $list110 = $database->query("select  * from  schedule where docid=$userid;");
@@ -134,11 +126,18 @@
                
                 
                 <tr>
-                    <td colspan="4" style="padding-top:10px;width: 100%;" >
-                    
+                    <td colspan="1" style="padding-top:10px;width: 100%;" >
                         <p class="heading-main12" style="margin-left: 45px;font-size:18px;color:rgb(49, 49, 49)">My Sessions (<?php echo $list110->num_rows; ?>) </p>
                     </td>
-                    
+                </tr>
+                <tr>
+                    <td colspan="4" >
+                        <div style="display: flex;margin-bottom: 30px;">
+                        <div class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49);margin-top: 5px;">Schedule a Session</div>
+                        <a href="?action=add-session&id=none&error=0" class="non-style-link"><button  class="login-btn btn-primary btn button-icon"  style="margin-left:25px;background-image: url('../img/icons/add.svg');">Add a Session</font></button>
+                        </a>
+                        </div>
+                    </td>
                 </tr>
                 
                 <tr>
@@ -176,7 +175,6 @@
 
                 $sqlmain= "select schedule.scheduleid,schedule.title,doctor.docname,schedule.scheduledate,schedule.scheduletime,schedule.nop from schedule inner join doctor on schedule.docid=doctor.docid where doctor.docid=$userid ";
                     if($_POST){
-                        //print_r($_POST);
                         $sqlpt1="";
                         if(!empty($_POST["sheduledate"])){
                             $sheduledate=$_POST["sheduledate"];
@@ -235,12 +233,15 @@
                                     
                                 }
                                 else{
+                                    
                                 for ( $x=0; $x<$result->num_rows;$x++){
                                     $row=$result->fetch_assoc();
                                     $scheduleid=$row["scheduleid"];
                                     $title=$row["title"];
                                     $docname=$row["docname"];
                                     $scheduledate=$row["scheduledate"];
+                                    $dateObject = DateTime::createFromFormat('Y-m-d', $scheduledate);
+                                    $scheduletime=$row["scheduletime"];
                                     $scheduletime=$row["scheduletime"];
                                     $nop=$row["nop"];
                                     echo '<tr>
@@ -249,7 +250,7 @@
                                         .'</td>
                                         
                                         <td style="text-align:center;">
-                                            '.substr($scheduledate,0,10).' '.substr($scheduletime,0,5).'
+                                            '.$dateObject->format('d-m-Y').' '.substr($scheduletime,0,5).'
                                         </td>
                                         <td style="text-align:center;">
                                             '.$nop.'
@@ -478,6 +479,120 @@
             </div>
             ';  
     }
+    if($action=='add-session'){
+
+            echo '
+            <div id="popup1" class="overlay">
+                    <div class="popup">
+                    <center>
+                    
+                    
+                        <a class="close" href="schedule.php">&times;</a> 
+                        <div style="display: flex;justify-content: center;">
+                        <div class="abc">
+                        <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
+                        <tr>
+                                <td class="label-td" colspan="2">'.
+                                   ""
+                                
+                                .'</td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <p style="padding: 0;margin: 0;text-align: left;font-size: 25px;font-weight: 500;">Add New Session.</p><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                <form action="add-session.php" method="POST" class="add-new-form">
+                                    <label for="title" class="form-label">Session Title : </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="title" class="input-text" placeholder="Name of this Session" required><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">    
+                                    <input type="hidden" name="docid" value="'.$userid.'">';
+                        echo     '
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="nop" class="form-label">Number of Patients/Appointment Numbers : </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="number" name="nop" class="input-text" min="0"  placeholder="The final appointment number for this session depends on this number" required><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="date" class="form-label">Session Date: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="date" name="date" class="input-text" min="'.date('d-m-Y').'" required><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="time" class="form-label">Schedule Time: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="time" name="time" class="input-text" placeholder="Time" required><br>
+                                </td>
+                            </tr>
+                           
+                            <tr>
+                                <td colspan="2">
+                                    <input type="reset" value="Reset" class="login-btn btn-primary-soft btn" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                
+                                    <input type="submit" value="Place this Session" class="login-btn btn-primary btn" name="shedulesubmit">
+                                </td>
+                
+                            </tr>
+                           
+                            </form>
+                            </tr>
+                        </table>
+                        </div>
+                        </div>
+                    </center>
+                    <br><br>
+            </div>
+            </div>
+            ';
+        } elseif ($action=='session-added') {
+            $titleget=$_GET["title"];
+            echo '
+            <div id="popup1" class="overlay">
+                    <div class="popup">
+                    <center>
+                    <br><br>
+                        <h2>Session Placed.</h2>
+                        <a class="close" href="schedule.php">&times;</a>
+                        <div class="content">
+                        '.substr($titleget,0,40).' was scheduled.<br><br>
+                            
+                        </div>
+                        <div style="display: flex;justify-content: center;">
+                        
+                        <a href="schedule.php" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;OK&nbsp;&nbsp;</font></button></a>
+                        <br><br><br><br>
+                        </div>
+                    </center>
+            </div>
+            </div>
+            ';
+        }
 }
     ?>
     </div>
